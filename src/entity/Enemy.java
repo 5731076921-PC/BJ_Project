@@ -1,6 +1,13 @@
 package entity;
 
 public abstract class Enemy  extends CollidableEntity {
-	public
+		
+	public void hitWithPlayer(int decScore){
+		Player.setScore(Player.getScore() - decScore);
+		destroyed = true;
+	}
+	
+
+	
 
 }

@@ -4,7 +4,7 @@ import render.IRenderable;
 
 public abstract class Entity implements IRenderable{
 
-	protected int x,y,z;
+	protected int x,y,z;          
 	protected boolean visible,destroyed;
 	
 	protected Entity(){

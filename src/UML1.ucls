@@ -28,7 +28,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="entity.Student" project="BJ_Project" file="/BJ_Project/src/entity/Student.java" 
+  <class id="4" language="java" name="entity.Player" project="BJ_Project" file="/BJ_Project/src/entity/Player.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="140" y="307"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -147,7 +147,7 @@
   </class>  
   <class id="17" language="java" name="entity.SleepyDrug" project="BJ_Project" 
     file="/BJ_Project/src/entity/SleepyDrug.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1538" y="307"/>    
+    <position height="-1" width="-1" x="54" y="567"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -156,7 +156,7 @@
   </class>  
   <class id="18" language="java" name="entity.Rosen" project="BJ_Project" file="/BJ_Project/src/entity/Rosen.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1666" y="307"/>    
+    <position height="-1" width="-1" x="182" y="567"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -165,7 +165,7 @@
   </class>  
   <class id="19" language="java" name="entity.Cartoon" project="BJ_Project" file="/BJ_Project/src/entity/Cartoon.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1793" y="307"/>    
+    <position height="-1" width="-1" x="309" y="567"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -173,7 +173,7 @@
     </display>  
   </class>  
   <generalization id="20">    
-    <end type="SOURCE" refId="5"/>    
+    <end type="SOURCE" refId="15"/>    
     <end type="TARGET" refId="6"/>  
   </generalization>  
   <realization id="21">    
@@ -185,7 +185,7 @@
     <end type="TARGET" refId="6"/>  
   </generalization>  
   <generalization id="23">    
-    <end type="SOURCE" refId="15"/>    
+    <end type="SOURCE" refId="5"/>    
     <end type="TARGET" refId="6"/>  
   </generalization>  
   <generalization id="24">    
