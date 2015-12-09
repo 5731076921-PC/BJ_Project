@@ -1,0 +1,4 @@
+preferred size
+(1200 x 680)
+
+questionmark screenSize.HEIGHT*5/6

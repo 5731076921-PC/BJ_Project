@@ -1,8 +1,14 @@
 package entity;
 
 public abstract class CollidableEntity extends Entity{
+
+
 	protected int radius;
 	protected int speed;
+	public CollidableEntity(int x, int y, int z, int speed) {
+		super(x, y, z);
+		// TODO Auto-generated constructor stub
+	}
 	
 	protected boolean collideWith(CollidableEntity other){
 		return Math.hypot(this.x-other.x, this.y-other.y) <= this.radius+other.radius;
@@ -12,8 +18,8 @@ public abstract class CollidableEntity extends Entity{
 			e.destroyed = false;
 		}
 	}
-	public void move() {
-		
-	}
-	
+	public abstract void move();
+	 public void upSpeed() {
+		 this.speed = speed*Player.getLevel();
+	 }
 }
