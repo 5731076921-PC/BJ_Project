@@ -14,35 +14,9 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
-public class RenderManager {
+import Utility.DrawingUtility;
 
-	public static BufferedImage mapSprite;
-	public static BufferedImage mineSprite;
-//	private static BufferedImage getImage(String directory){
-//		BufferedImage img = null;
-//		try {
-//			ClassLoader x = RenderManager.class.getClassLoader();
-//			img = ImageIO.read(x.getResource(directory));
-//		} catch(IOException e) {
-//			img = null;
-//		}
-//		return img;
-//	}
-	static{
-		try {
-//			mapSprite = ImageIO.read(new File("Map.png"));
-//			mineSprite = ImageIO.read(new File("Mine.png"));
-			
-			ClassLoader loader = RenderManager.class.getClassLoader();
-			mapSprite = ImageIO.read(loader.getResource("Map.png"));
-			mineSprite = ImageIO.read(loader.getResource("Mine.png"));
-			
-		} catch (IOException e) {
-			mapSprite = null;
-			mineSprite = null;
-		}
-	}
-	
+public class RenderManager {
 	
 	private List<IRenderable> entities;
 	
@@ -74,8 +48,11 @@ public class RenderManager {
 	
 	//Will be called by JComponent object
 	public void drawScreen(Graphics2D g2d){
-		g2d.setBackground(Color.BLACK);
-		g2d.clearRect(0, 0, 640, 480);
+		DrawingUtility.drawBackground(g2d);
+		DrawingUtility.drawScoreBar(g2d);
+		DrawingUtility.drawStudent(g2d);
+		DrawingUtility.drawStressBar(g2d, 5);
+		DrawingUtility.drawQuestionMarkItem(g2d, 15, 0);
 		for(IRenderable entity : entities){
 			if(entity.isVisible() && !entity.isDestroyed()){
 				entity.draw(g2d);
