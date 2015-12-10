@@ -2,6 +2,8 @@ package entity;
 
 import java.awt.Graphics2D;
 
+import Utility.DrawingUtility;
+
 public class QuestionMark extends Enemy {	
 	
 	public QuestionMark(int x, int y, int z, int speed) {
@@ -13,7 +15,7 @@ public class QuestionMark extends Enemy {
 	@Override
 	public void draw(Graphics2D g2d) {
 		// TODO Auto-generated method stub
-		
+		DrawingUtility.drawQuestionMarkItem(g2d, x, 0);
 	}
 
 	@Override

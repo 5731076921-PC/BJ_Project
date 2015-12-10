@@ -1,37 +1,83 @@
 package Utility;
 
+
 public class InputUtility {
 
-	public static int mouseX,mouseY;
-	public static boolean mouseOnScreen = true;
-	private static boolean isLeftDown = false;
-	private static boolean isLeftClickedLastTick = false;
-	private static boolean keyPressed[] = new boolean[256];
+	private static int mouseX,mouseY;
+	private static boolean mouseLeftDown,mouseRightDown,mouseOnScreen;
+	private static boolean mouseLeftTriggered,mouseRightTriggered;
+	private static boolean[] keyPressed = new boolean[256];
+	private static boolean[] keyTriggered = new boolean[256];
+	
+	public static int getMouseX() {
+		return mouseX;
+	}
+	public static void setMouseX(int mouseX) {
+		InputUtility.mouseX = mouseX;
+	}
+	public static int getMouseY() {
+		return mouseY;
+	}
+	public static void setMouseY(int mouseY) {
+		InputUtility.mouseY = mouseY;
+	}
+	
+	public static boolean isMouseLeftDown() {
+		return mouseLeftDown;
+	}
+	public static void setMouseLeftDown(boolean mouseLeftDown) {
+		InputUtility.mouseLeftDown = mouseLeftDown;
+	}
+	public static boolean isMouseRightDown() {
+		return mouseRightDown;
+	}
+	public static void setMouseRightDown(boolean mouseRightDown) {
+		InputUtility.mouseRightDown = mouseRightDown;
+	}
+	
+	public static boolean isMouseOnScreen() {
+		return mouseOnScreen;
+	}
+	public static void setMouseOnScreen(boolean mouseOnScreen) {
+		InputUtility.mouseOnScreen = mouseOnScreen;
+	}
+	
+	public static boolean isMouseLeftClicked() {
+		return mouseLeftTriggered;
+	}
+	public static void setMouseLeftTriggered(boolean v){ 
+		InputUtility.mouseLeftTriggered = v;
+	}
+	public static boolean isMouseRightClicked() {
+		return mouseRightTriggered;
+	}
+	public static void setMouseRightTriggered(boolean v){
+		InputUtility.mouseRightTriggered = v;
+	}
 	
 	public static boolean getKeyPressed(int key) {
-		if(key < 0 || key >= 256) return false;
+		if(key>255 || key<0) return false;
 		return keyPressed[key];
 	}
 	public static void setKeyPressed(int key,boolean pressed) {
-		if(key < 0 || key >= 256) return;
+		if(key>255 || key<0) return;
 		InputUtility.keyPressed[key] = pressed;
 	}
 	
-	public static void mouseLeftDown(){
-		isLeftDown = true;
-		isLeftClickedLastTick = true;
+	public static boolean getKeyTriggered(int key) {
+		if(key>255 || key<0) return false;
+		return keyTriggered[key];
 	}
-	
-	public static void mouseLeftRelease(){
-		isLeftDown = false;
-	}
-	
-	public static boolean isLeftClickTriggered(){
-		return isLeftClickedLastTick;
+	public static void setKeyTriggered(int key,boolean pressed) {
+		if(key>255 || key<0) return;
+		InputUtility.keyTriggered[key] = pressed;
 	}
 	
 	public static void postUpdate(){
-		isLeftClickedLastTick = false;
+		setMouseLeftTriggered(false);
+		setMouseRightTriggered(false);
+		for (int key = 0; key < 256; key++) {
+			setKeyTriggered(key, false);
+		}
 	}
-	
 }

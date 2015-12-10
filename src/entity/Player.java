@@ -11,6 +11,7 @@ public class Player implements IRenderable{
 private static  int score;
 private static int level;
 private static int stressLevel;
+private static boolean pause;
 
 	public Player() {
 		super();
@@ -65,6 +66,14 @@ private static int stressLevel;
 	public boolean isVisible() {
 		// TODO Auto-generated method stub
 		return true;
+	}
+
+	public static boolean isPause() {
+		return pause;
+	}
+
+	public static void setPause(boolean pause) {
+		Player.pause = pause;
 	}
 
 
