@@ -30,7 +30,8 @@ public class DrawingUtility {
 		return img;
 	}
 	protected static final BufferedImage bg = getImage("res/img/bg.png");
-	protected static final BufferedImage questionMark = getImage("res/img/questionMark.png");
+	protected static final BufferedImage questionMarkL = getImage("res/img/questionMark-L.png");
+	protected static final BufferedImage questionMarkR = getImage("res/img/questionMark-R.png");
 	protected static final BufferedImage student = getImage("res/img/player.png");
 	protected static final BufferedImage rosen = getImage("res/img/rosen.png");
 	protected static final BufferedImage f = getImage("res/img/f.png");
@@ -47,6 +48,9 @@ public class DrawingUtility {
 		g2.drawString("SCORE: " + Player.getScore() , ScreenSize.WIDTH*8/10, h);
 	}
 	public static void drawQuestionMarkItem(Graphics2D g2,int x,int direction) {
+		BufferedImage questionMark;
+		if(direction ==1) questionMark =  questionMarkL;
+		else questionMark = questionMarkR;
 	g2.drawImage(questionMark, null, x, 450);
 	}
 	public static void drawStudent(Graphics2D g2) {
