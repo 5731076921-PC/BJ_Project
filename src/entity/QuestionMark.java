@@ -3,18 +3,25 @@ package entity;
 import java.awt.Graphics2D;
 
 import Utility.DrawingUtility;
+import Utility.InputUtility;
+import Utility.ScreenSize;
 
 public class QuestionMark extends Enemy {	
-	
+	private int direction;
+	private int directionTick;
+	private int width =86;
+	private int height =162;
 	public QuestionMark(int x, int y, int z, int speed) {
 		super(x, y, z, speed);
+		direction =1;
+		directionTick = 0;
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void draw(Graphics2D g2d) {
 		// TODO Auto-generated method stub
-		DrawingUtility.drawQuestionMarkItem(g2d, x, 0);
+		DrawingUtility.drawQuestionMarkItem(g2d, x, direction);
 	}
 
 	@Override
@@ -26,7 +33,7 @@ public class QuestionMark extends Enemy {
 	@Override
 	public boolean isDestroyed() {
 		// TODO Auto-generated method stub
-		return false;
+		return destroyed;
 	}
 
 	@Override
@@ -38,9 +45,25 @@ public class QuestionMark extends Enemy {
 	@Override
 	public void move() {
 		// TODO Auto-generated method stub
+		directionTick++;
+		if(directionTick >= 8) {
+		direction = -direction;
+			directionTick = 0;
+		}
+		
 		x += speed;
 		if(x<0) destroyed = true;
-		System.out.println(speed);
+		if(x>=ScreenSize.STUDENTBOUND) {
+			hitWithPlayer();
+		}
+//		if(InputUtility.isMouseLeftDown()) {
+//			if(InputUtility.getMouseX()<= x+width) {
+//				if(InputUtility.getMouseY()>y && y<y+height) {
+//					onClick();
+//				}
+//			}
+//		}
+
 	}
 
 	@Override
@@ -53,8 +76,16 @@ public class QuestionMark extends Enemy {
 	@Override
 	public void onClick() {
 		// TODO Auto-generated method stub
-		speed = -50;
+		speed = -20;
 		Player.setScore(Player.getScore()+150);
+	}
+	public boolean isMouseOver() {
+		if(InputUtility.getMouseX()<= x+width) {
+			if(InputUtility.getMouseY()>y && y<y+height) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 

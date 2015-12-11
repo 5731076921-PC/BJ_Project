@@ -19,7 +19,6 @@ private static boolean pause;
 		this.level = 1;
 		this.stressLevel = 0;
 	}
-
 	public static int getScore() {
 		return score;
 	}

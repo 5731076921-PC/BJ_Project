@@ -20,6 +20,7 @@ public abstract class CollidableEntity extends Entity{
 		}
 	}
 	public abstract void move();
+	public abstract boolean isMouseOver();
 	 public void upSpeed() {
 		 this.speed = speed*Player.getLevel();
 	 }

@@ -49,6 +49,13 @@ public class MainLogic {
 		//Create random target
 		createTarget();
 		
+		//Attack
+		if(InputUtility.isMouseLeftDown()) {
+			if(getTopEntity() != null) {
+				getTopEntity().onClick();
+			}
+			
+		}
 		
 		//Update target object
 		for(CollidableEntity obj : onScreenObject){
@@ -69,10 +76,9 @@ public class MainLogic {
 			//Random next creation delay
 			// set nextObjectCreationDelay 
 			nextObjectCreationDelay = RandomUtility.random(10, 100);
-			QuestionMark x =  new QuestionMark(0, 0, zCounter, 10);
+			QuestionMark x =  new QuestionMark(0, 450, zCounter, 3);
 			onScreenObject.add(x);
 			renderManager.add(x);
-			Player.setStressLevel(Player.getStressLevel()+20);
 			System.out.println(Player.getStressLevel());
 			//Increase z counter (so the next object will be created on top of the previous one)
 			zCounter++;
@@ -81,26 +87,37 @@ public class MainLogic {
 			}
 		}
 	}
-	
-	public synchronized List<IRenderable> getSortedRenderableObject() {
-		List<IRenderable> sortedRenderable = new ArrayList<IRenderable>();
-		if(!readyToRender) return sortedRenderable;
-		for(CollidableEntity object : onScreenObject){
-			sortedRenderable.add(object);
-		}
-
-		
-		Collections.sort(sortedRenderable, new Comparator<IRenderable>() {
-			@Override
-			public int compare(IRenderable o1, IRenderable o2) {
-				if(o1.getZ() > o2.getZ())
-					return 1;
-				else if(o1.getZ() < o2.getZ())
-					return -1;
-				else
-					return 0;
+	public CollidableEntity getTopEntity() {
+		int z =Integer.MIN_VALUE;
+		CollidableEntity entity = null;
+		for(CollidableEntity e : onScreenObject) {
+			if(e.getZ()>z && e.isMouseOver()) {
+				z= e.getZ();
+				entity = e;
 			}
-		});
-		return sortedRenderable;
+		}
+		return entity;
 	}
+	
+//	public synchronized List<IRenderable> getSortedRenderableObject() {
+//		List<IRenderable> sortedRenderable = new ArrayList<IRenderable>();
+//		if(!readyToRender) return sortedRenderable;
+//		for(CollidableEntity object : onScreenObject){
+//			sortedRenderable.add(object);
+//		}
+//
+//		
+//		Collections.sort(sortedRenderable, new Comparator<IRenderable>() {
+//			@Override
+//			public int compare(IRenderable o1, IRenderable o2) {
+//				if(o1.getZ() > o2.getZ())
+//					return 1;
+//				else if(o1.getZ() < o2.getZ())
+//					return -1;
+//				else
+//					return 0;
+//			}
+//		});
+//		return sortedRenderable;
+//	}
 }
