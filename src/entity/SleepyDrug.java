@@ -6,18 +6,22 @@ import Utility.DrawingUtility;
 import Utility.ScreenSize;
 
 public class SleepyDrug extends Enemy {
-private int speedSlow;
-private boolean hit;
-private int sleepyTime;
-private int sleepyTimeCount;
+	private int speedSlow;
+	private boolean hit;
+	private boolean clicked;
+	private int sleepyTime;
+	private int sleepyTimeCount;
 
-	public SleepyDrug(int x, int y, int z, int speed, int speedSlow,int sleepyTime) {
+	public SleepyDrug(int x, int y, int z, int speed, int speedSlow, int sleepyTime) {
 		super(x, y, z, speed);
 		// TODO Auto-generated constructor stub
 		this.speedSlow = speedSlow;
 		this.hit = false;
 		this.sleepyTime = sleepyTime;
 		this.sleepyTimeCount = 0;
+		this.width = 190;
+		this.height = 67;
+		this.clicked = false;
 	}
 
 	@Override
@@ -28,16 +32,8 @@ private int sleepyTimeCount;
 
 	@Override
 	public void draw(Graphics2D g2d) {
-		// TODO Auto-generated method stub		
+		// TODO Auto-generated method stub
 		DrawingUtility.drawSleepyDrug(g2d, x, y);
-		
-		//DrawingEffect
-//		if(hit == true) {
-//			DrawingUtility.drawSleepyDrugBG(g2d, 0, 0);
-//		}
-//		else {
-//			DrawingUtility.drawSleepyDrug(g2d, x, y);
-//		}
 	}
 
 	@Override
@@ -55,54 +51,35 @@ private int sleepyTimeCount;
 	@Override
 	public void move() {
 		// TODO Auto-generated method stub
-		if(x <= ScreenSize.WIDTH/2) {
-			x+= speed;
+		if (!clicked) {
+			if (x <= 400) {
+				x += speed;
+			} else {
+				x += speedSlow;
+			}
 		} else {
-			x+= speedSlow;
+			x -= speed;
 		}
-		if(x<0) destroyed = true;
-		if(this.sleepyTimeCount == sleepyTime){
-			hit = false;
-			sleepyTimeCount = 0;
+		if (x < 0)
+			destroyed = true;
+		if (outOfBound()) {
+			hitWithPlayer();
 		}
-		sleepyTimeCount++;
 	}
 
 	@Override
 	public void hitWithPlayer() {
 		// TODO Auto-generated method stub
-		this. hit = true;
+		MainLogic.setSleep(true);
+		destroyed = true;
 	}
 
 	@Override
 	public void onClick() {
 		// TODO Auto-generated method stub
 		speed = -20;
-		Player.setScore(Player.getScore()+350);
-	}
-	
-	public boolean isHit() {
-		return hit;
-	}
-
-	public void setHit(boolean hit) {
-		this.hit = hit;
-	}
-
-	public int getSleepyTime() {
-		return sleepyTime;
-	}
-
-	public void setSleepyTime(int sleepyTime) {
-		this.sleepyTime = sleepyTime;
-	}
-
-	public int getSleepyTimeCount() {
-		return sleepyTimeCount;
-	}
-
-	public void setSleepyTimeCount(int sleepyTimeCount) {
-		this.sleepyTimeCount = sleepyTimeCount;
+		Player.setScore(Player.getScore() + 350);
+		clicked = true;
 	}
 
 }

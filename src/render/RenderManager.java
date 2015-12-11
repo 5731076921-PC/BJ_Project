@@ -50,7 +50,7 @@ public class RenderManager {
 	
 	//Will be called by JComponent object
 	public synchronized void drawScreen(Graphics2D g2d){
-		DrawingUtility.drawBackground(g2d);
+		DrawingUtility.drawBackground(g2d,MainLogic.isSleep());
 		DrawingUtility.drawScoreBar(g2d);
 		DrawingUtility.drawStudent(g2d,Player.getLevel(),MainLogic.isHitted());
 		DrawingUtility.drawStressBar(g2d, Player.getStressLevel());

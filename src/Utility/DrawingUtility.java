@@ -41,10 +41,12 @@ public class DrawingUtility {
 	protected static final BufferedImage sleepyDrug = getImage("res/img/drug.png");
 	protected static final BufferedImage sleepyDrugBG = getImage("res/img/sleepingBG.png");
 	
-	public static void drawBackground(Graphics2D g2) {
+	public static void drawBackground(Graphics2D g2,boolean sleep) {
 		g2.clearRect(0, 0, 1200,680);
-		g2.drawImage(bg, null, 0, 0);
-
+		if(!sleep)
+			g2.drawImage(bg, null, 0, 0);
+		else
+			g2.drawImage(sleepyDrugBG, null, 0, 0);
 	}
 	public static void drawScoreBar(Graphics2D g2) {
 		g2.setColor(Color.WHITE);

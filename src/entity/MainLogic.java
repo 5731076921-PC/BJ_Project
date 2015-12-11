@@ -23,7 +23,9 @@ public class MainLogic {
 	private int[] nextObjectCreationDelay = {30, 60, 600, 350, 650, 800, 1200};	
 	private boolean readyToRender = false; //For dealing with synchronization issue
 	private static boolean hitted;
+	private static boolean sleep;
 	private int hitCounter =0;
+	private static int sleepCounter =0;
 	private RenderManager renderManager;
 	public MainLogic(RenderManager renderManager) {
 		this.renderManager = renderManager;
@@ -32,6 +34,7 @@ public class MainLogic {
 	//Called before enter the game loop
 	public synchronized void onStart(){
 		hitted = false;
+		sleep = false;
 	}
 	
 	//Called after exit the game loop
@@ -49,6 +52,13 @@ public class MainLogic {
 		if(Player.isPause()){
 			return;
 		}
+		if(sleep && sleepCounter<=50) {
+			sleepCounter++;
+		} else if(sleep) {
+			sleep = !sleep;
+			sleepCounter= 0;
+		}
+		
 				
 		//Create random target
 		createTarget();
@@ -62,7 +72,7 @@ public class MainLogic {
 			hitted= false;
 		}
 		//Attack
-		if(InputUtility.isMouseLeftDown()) {
+		if(InputUtility.isMouseLeftDown() && !sleep) {
 			if(getTopEntity() != null) {
 				getTopEntity().onClick();
 				InputUtility.setMouseLeftDown(false);
@@ -87,6 +97,10 @@ public class MainLogic {
 	}
 	
 	private void createTarget(){
+//		Help me generate delay and create sleepy drug using this constructor.
+//		SleepyDrug z = new SleepyDrug(0, 350, zCounter, 20, 3, 0);
+//		onScreenObject.add(z);
+//		renderManager.add(z);
 		for (int k = 0; k < nextObjectCreationDelay.length; k++) {
 			if (nextObjectCreationDelay[k] > 0) {
 				nextObjectCreationDelay[k]--;
@@ -140,6 +154,12 @@ public class MainLogic {
 	}
 	public static boolean isHitted() {
 		return hitted;
+	}
+	public static boolean isSleep() {
+		return sleep;
+	}
+	public static void setSleep(boolean sleep) {
+		MainLogic.sleep = sleep;
 	}
 	
 //	public synchronized List<IRenderable> getSortedRenderableObject() {
