@@ -40,6 +40,9 @@ public class DrawingUtility {
 	protected static final BufferedImage f = getImage("res/img/f.png");
 	protected static final BufferedImage sleepyDrug = getImage("res/img/drug.png");
 	protected static final BufferedImage sleepyDrugBG = getImage("res/img/sleepingBG.png");
+	protected static final BufferedImage comic = getImage("res/img/comic.png");
+	protected static final BufferedImage music = getImage("res/img/music.png");
+	protected static final BufferedImage bomb = getImage("res/img/bomb.png");
 	
 	public static void drawBackground(Graphics2D g2,boolean sleep) {
 		g2.clearRect(0, 0, 1200,680);
@@ -99,6 +102,15 @@ public class DrawingUtility {
 	
 	public static void drawSleepyDrugBG(Graphics2D g2,int x, int y){
 		g2.drawImage(sleepyDrugBG, null, x, y);
+	}
+	public static void drawComic(Graphics2D g2,int x, int y) {
+		g2.drawImage(comic, null, x, y);
+	}
+	public static void drawMusic(Graphics2D g2,int x, int y) {
+		g2.drawImage(music, null, x, y);
+	}
+	public static void drawBomb(Graphics2D g2,int x, int y) {
+		g2.drawImage(bomb, null, x, y);
 	}
 	
 	

@@ -67,7 +67,7 @@ public class GameScreen extends JComponent{
 			
 			@Override
 			public void mouseMoved(MouseEvent e) {
-				// TODO Auto-generateda method stub
+				// TODO Auto-generated method stub
 				if(InputUtility.isMouseOnScreen())
 					{
 						InputUtility.setMouseX(e.getX());
@@ -90,7 +90,6 @@ public class GameScreen extends JComponent{
 			@Override
 			public void keyTyped(KeyEvent e) {
 				// TODO Auto-generated method stub
-				
 			}
 			
 			@Override

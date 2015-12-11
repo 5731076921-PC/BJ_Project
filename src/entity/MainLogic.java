@@ -8,6 +8,7 @@ import java.util.List;
 
 import Utility.InputUtility;
 import Utility.RandomUtility;
+import Utility.ScreenSize;
 import render.IRenderable;
 import render.RenderManager;
 
@@ -15,7 +16,7 @@ import render.RenderManager;
 
 public class MainLogic {
 
-	//All renderable objectss
+	//All renderable objects
 	private List<CollidableEntity> onScreenObject = new ArrayList<CollidableEntity>();
 
 	private int zCounter = Integer.MIN_VALUE+1;
@@ -47,6 +48,7 @@ public class MainLogic {
 		//Paused
 		if(InputUtility.getKeyTriggered(KeyEvent.VK_ENTER)){
 			Player.setPause(!Player.isPause());
+			InputUtility.setKeyTriggered(KeyEvent.VK_ENTER, false);
 		}
 		
 		if(Player.isPause()){
@@ -97,10 +99,15 @@ public class MainLogic {
 	}
 	
 	private void createTarget(){
-//		Help me generate delay and create sleepy drug using this constructor.
+//		Help me generate delay and create sleepy drug, cartoon using this constructor.
 //		SleepyDrug z = new SleepyDrug(0, 350, zCounter, 20, 3, 0);
 //		onScreenObject.add(z);
 //		renderManager.add(z);
+		
+//		Cartoon w = new Cartoon(0, ScreenSize.HEIGHT-146, zCounter, 2);
+//		onScreenObject.add(w);
+//		renderManager.add(w);
+
 		for (int k = 0; k < nextObjectCreationDelay.length; k++) {
 			if (nextObjectCreationDelay[k] > 0) {
 				nextObjectCreationDelay[k]--;
@@ -114,12 +121,14 @@ public class MainLogic {
 			QuestionMark x = new QuestionMark(0, 450, zCounter, 3);
 			onScreenObject.add(x);
 			renderManager.add(x);
+
 		}
 		if (nextObjectCreationDelay[1] <= 0) {
 			nextObjectCreationDelay[1] = RandomUtility.random(40, 90);
 			Rosen y = new Rosen(0, RandomUtility.random(100, 400), zCounter, 5);
 			onScreenObject.add(y);
 			renderManager.add(y);
+
 		}
 
 		if (nextObjectCreationDelay[2] <= 0) {

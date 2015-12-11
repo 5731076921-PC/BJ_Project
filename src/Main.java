@@ -17,6 +17,7 @@ public class Main {
 		RenderManager renderManager = new RenderManager();
 		MainLogic logic = new MainLogic(renderManager);
 		JComponent gameScreen = new GameScreen(renderManager);
+		gameScreen.setFocusable(true);
 		frame.getContentPane().add(gameScreen);
 		frame.pack();
 		frame.setVisible(true);

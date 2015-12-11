@@ -6,7 +6,7 @@ import org.w3c.dom.Entity;
 
 import render.IRenderable;
 
-public class Player implements IRenderable{
+public class Player {
 
 private static  int score;
 private static int level = 1;
@@ -24,6 +24,7 @@ private static boolean pause;
 
 	public static void setScore(int score) {
 		Player.score = score;
+		if(score<0) Player.score =0;
 	}
 
 	public static int getLevel() {
@@ -33,6 +34,7 @@ private static boolean pause;
 	public static void setLevel(int level) {
 		Player.level = level;
 		if(level>3) Player.level =3;
+		else if(level<0) Player.level =0;
 	}
 
 	public static int getStressLevel() {
@@ -48,30 +50,6 @@ private static boolean pause;
 
 		}
 		else Player.stressLevel = stressLevel;
-	}
-
-	@Override
-	public int getZ() {
-		// TODO Auto-generated method stub
-		return Integer.MAX_VALUE;
-	}
-
-	@Override
-	public void draw(Graphics2D g2d) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public boolean isDestroyed() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean isVisible() {
-		// TODO Auto-generated method stub
-		return true;
 	}
 
 	public static boolean isPause() {
