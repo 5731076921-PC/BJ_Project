@@ -53,13 +53,15 @@ public class MainLogic {
 		if(InputUtility.isMouseLeftDown()) {
 			if(getTopEntity() != null) {
 				getTopEntity().onClick();
+				InputUtility.setMouseLeftDown(false);
 			}
 			
 		}
-		
+		System.out.println(Player.getLevel());
 		//Update target object
 		for(CollidableEntity obj : onScreenObject){
 			obj.move();
+			obj.upSpeed();
 		}
 		
 		//Remove unused image
@@ -77,9 +79,11 @@ public class MainLogic {
 			// set nextObjectCreationDelay 
 			nextObjectCreationDelay = RandomUtility.random(10, 100);
 			QuestionMark x =  new QuestionMark(0, 450, zCounter, 3);
+			Rosen y = new Rosen(0, RandomUtility.random(100, 400), zCounter,5 );
+			onScreenObject.add(y);
+			renderManager.add(y);
 			onScreenObject.add(x);
 			renderManager.add(x);
-			System.out.println(Player.getStressLevel());
 			//Increase z counter (so the next object will be created on top of the previous one)
 			zCounter++;
 			if(zCounter == Integer.MAX_VALUE-1){

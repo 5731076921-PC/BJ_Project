@@ -22,9 +22,6 @@ public abstract class Entity implements IRenderable{
 	}
 	public abstract void hitWithPlayer();
 	public abstract void onClick();
-//	public static boolean hitWithPlayer(Entity x) {
-//		if()
-//	}
 	
 
 }

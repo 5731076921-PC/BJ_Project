@@ -9,12 +9,12 @@ import Utility.ScreenSize;
 public class QuestionMark extends Enemy {	
 	private int direction;
 	private int directionTick;
-	private int width =86;
-	private int height =162;
 	public QuestionMark(int x, int y, int z, int speed) {
 		super(x, y, z, speed);
 		direction =1;
 		directionTick = 0;
+		width = 86;
+		height = 162;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -56,13 +56,6 @@ public class QuestionMark extends Enemy {
 		if(x>=ScreenSize.STUDENTBOUND) {
 			hitWithPlayer();
 		}
-//		if(InputUtility.isMouseLeftDown()) {
-//			if(InputUtility.getMouseX()<= x+width) {
-//				if(InputUtility.getMouseY()>y && y<y+height) {
-//					onClick();
-//				}
-//			}
-//		}
 
 	}
 
@@ -79,14 +72,7 @@ public class QuestionMark extends Enemy {
 		speed = -20;
 		Player.setScore(Player.getScore()+150);
 	}
-	public boolean isMouseOver() {
-		if(InputUtility.getMouseX()<= x+width) {
-			if(InputUtility.getMouseY()>y && y<y+height) {
-				return true;
-			}
-		}
-		return false;
-	}
+
 
 
 }

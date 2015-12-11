@@ -9,14 +9,13 @@ import render.IRenderable;
 public class Player implements IRenderable{
 
 private static  int score;
-private static int level;
+private static int level = 1;
 private static int stressLevel;
 private static boolean pause;
 
 	public Player() {
 		super();
 		this.score = 0;
-		this.level = 1;
 		this.stressLevel = 0;
 	}
 	public static int getScore() {
@@ -33,6 +32,7 @@ private static boolean pause;
 
 	public static void setLevel(int level) {
 		Player.level = level;
+		if(level>3) Player.level =3;
 	}
 
 	public static int getStressLevel() {
@@ -42,7 +42,10 @@ private static boolean pause;
 	public static void setStressLevel(int stressLevel) {
 		if(stressLevel >100) {
 			Player.stressLevel =0;
-			level++;
+			if(level<3) {
+				level++;
+			}
+
 		}
 		else Player.stressLevel = stressLevel;
 	}

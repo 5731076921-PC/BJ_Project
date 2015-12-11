@@ -35,7 +35,9 @@ public class DrawingUtility {
 	protected static final BufferedImage student = getImage("res/img/player.png");
 	protected static final BufferedImage rosen = getImage("res/img/rosen.png");
 	protected static final BufferedImage f = getImage("res/img/f.png");
-
+//	protected static final BufferedImage sleepyDrug = getImage("res/img/Drug.png");
+//	protected static final BufferedImage sleepyDrugBG = getImage("res/img/SleepingBG.png");
+	
 	public static void drawBackground(Graphics2D g2) {
 		g2.clearRect(0, 0, 1200,680);
 		g2.drawImage(bg, null, 0, 0);
@@ -74,6 +76,13 @@ public class DrawingUtility {
 	public static void drawF(Graphics2D g2,int x, int y) {
 		g2.drawImage(f, null, x, y);
 	}
+//	public static void drawSleepyDrug(Graphics2D g2,int x, int y){
+//		g2.drawImage(sleepyDrug, null, x, y);
+//	}
+//	
+//	public static void drawSleepyDrugBG(Graphics2D g2,int x, int y){
+//		g2.drawImage(sleepyDrugBG, null, x, y);
+//	}
 	
 	
 
