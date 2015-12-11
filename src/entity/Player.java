@@ -1,5 +1,5 @@
 package entity;
-
+//s
 import java.awt.Graphics2D;
 
 import org.w3c.dom.Entity;

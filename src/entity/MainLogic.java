@@ -15,7 +15,7 @@ import render.RenderManager;
 
 public class MainLogic {
 
-	//All renderable objects
+	//All renderable objectss
 	private List<CollidableEntity> onScreenObject = new ArrayList<CollidableEntity>();
 
 	private int zCounter = Integer.MIN_VALUE+1;

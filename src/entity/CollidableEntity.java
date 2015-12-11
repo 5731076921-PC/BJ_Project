@@ -8,7 +8,7 @@ public abstract class CollidableEntity extends Entity{
 	public CollidableEntity(int x, int y, int z, int speed) {
 		super(x, y, z);
 		this.speed = speed;
-		// TODO Auto-generated constructor stub
+		// TODOa Auto-generated constructor stub
 	}
 	
 	protected boolean collideWith(CollidableEntity other){
