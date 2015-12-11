@@ -3,7 +3,6 @@ import java.awt.Dimension;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
-import entity.GameLogic;
 import entity.MainLogic;
 import render.GameScreen;
 import render.RenderManager;
