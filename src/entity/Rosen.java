@@ -68,8 +68,8 @@ public class Rosen extends Enemy {
 	@Override
 	public void hitWithPlayer() {
 		// TODO Auto-generated method stub
-		destroyed = true;
 		Player.setStressLevel(Player.getStressLevel() + 35);
+		destroyed = true;
 	}
 
 	@Override
@@ -77,6 +77,7 @@ public class Rosen extends Enemy {
 		// TODO Auto-generated method stub
 		movingDirection = 0;
 		speed = -20;
+		tempspeed = -20;
 		Player.setScore(Player.getScore()+250);
 
 	}

@@ -3,12 +3,15 @@ package entity;
 import java.awt.Graphics2D;
 
 import Utility.DrawingUtility;
+import Utility.ScreenSize;
 
 public class FThrow extends Enemy {
 
 	public FThrow(int x, int y, int z, int speed) {
 		super(x, y, z, speed);
 		// TODO Auto-generated constructor stub
+		width = 78;
+		height = 90;
 	}
 
 	@Override
@@ -39,6 +42,9 @@ public class FThrow extends Enemy {
 	public void move() {
 		// TODO Auto-generated method stub
 		x += speed;
+		if(x>=ScreenSize.STUDENTBOUND) {
+			hitWithPlayer();
+		}
 		if(x<0) destroyed = true;
 	}
 
@@ -53,6 +59,7 @@ public class FThrow extends Enemy {
 	public void onClick() {
 		// TODO Auto-generated method stub
 		speed = -20;
+		tempspeed = -20;
 		Player.setScore(Player.getScore()+100);
 	}
 

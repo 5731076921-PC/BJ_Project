@@ -19,7 +19,8 @@ public class MainLogic {
 	private List<CollidableEntity> onScreenObject = new ArrayList<CollidableEntity>();
 
 	private int zCounter = Integer.MIN_VALUE+1;
-	private int nextObjectCreationDelay;	
+	//InitialDelay: ?, Rosen, F, Drug, Cartoon, Music, Bomb
+	private int[] nextObjectCreationDelay = {30, 60, 600, 350, 650, 800, 1200};	
 	private boolean readyToRender = false; //For dealing with synchronization issue
 	private RenderManager renderManager;
 	public MainLogic(RenderManager renderManager) {
@@ -57,7 +58,7 @@ public class MainLogic {
 			}
 			
 		}
-		System.out.println(Player.getLevel());
+		System.out.println(Player.getStressLevel());
 		//Update target object
 		for(CollidableEntity obj : onScreenObject){
 			obj.move();
@@ -72,25 +73,46 @@ public class MainLogic {
 	}
 	
 	private void createTarget(){
-		if(nextObjectCreationDelay > 0){
-			nextObjectCreationDelay--;
-		}else{
-			//Random next creation delay
-			// set nextObjectCreationDelay 
-			nextObjectCreationDelay = RandomUtility.random(10, 100);
-			QuestionMark x =  new QuestionMark(0, 450, zCounter, 3);
-			Rosen y = new Rosen(0, RandomUtility.random(100, 400), zCounter,5 );
-			onScreenObject.add(y);
-			renderManager.add(y);
+		for (int k = 0; k < nextObjectCreationDelay.length; k++) {
+			if (nextObjectCreationDelay[k] > 0) {
+				nextObjectCreationDelay[k]--;
+			} 
+		}	
+
+				// Random next creation delay
+				// set nextObjectCreationDelay
+		if (nextObjectCreationDelay[0] <= 0) {
+			nextObjectCreationDelay[0] = RandomUtility.random(10, 70);
+			QuestionMark x = new QuestionMark(0, 450, zCounter, 3);
 			onScreenObject.add(x);
 			renderManager.add(x);
+		}
+		if (nextObjectCreationDelay[1] <= 0) {
+			nextObjectCreationDelay[1] = RandomUtility.random(40, 90);
+			Rosen y = new Rosen(0, RandomUtility.random(100, 400), zCounter, 5);
+			onScreenObject.add(y);
+			renderManager.add(y);
+		}
+
+		if (nextObjectCreationDelay[2] <= 0) {
+			nextObjectCreationDelay[2] = RandomUtility.random(500, 850);
+			FThrow f[] = new FThrow[5];
+			for (int i = 0; i < f.length; i++) {
+				f[i] = new FThrow(0, 90 * i, zCounter, 4);
+			}
+			for (int i = 0; i < f.length; i++) {
+				onScreenObject.add(f[i]);
+				renderManager.add(f[i]);
+			}
+		}
+		
 			//Increase z counter (so the next object will be created on top of the previous one)
 			zCounter++;
 			if(zCounter == Integer.MAX_VALUE-1){
 				zCounter = Integer.MIN_VALUE+1;
 			}
 		}
-	}
+
 	public CollidableEntity getTopEntity() {
 		int z =Integer.MIN_VALUE;
 		CollidableEntity entity = null;
