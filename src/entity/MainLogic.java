@@ -1,4 +1,4 @@
-package logic;
+package entity;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -8,12 +8,8 @@ import java.util.List;
 
 import Utility.InputUtility;
 import Utility.RandomUtility;
-import entity.CollidableEntity;
-import entity.Entity;
-import entity.Player;
-import entity.QuestionMark;
-import entity.Rosen;
 import render.IRenderable;
+import render.RenderManager;
 
 
 
@@ -25,7 +21,10 @@ public class MainLogic {
 	private int zCounter = Integer.MIN_VALUE+1;
 	private int nextObjectCreationDelay;	
 	private boolean readyToRender = false; //For dealing with synchronization issue
-	
+	private RenderManager renderManager;
+	public MainLogic(RenderManager renderManager) {
+		this.renderManager = renderManager;
+	}
 	//Called before enter the game loop
 	public synchronized void onStart(){
 		
@@ -69,16 +68,12 @@ public class MainLogic {
 		}else{
 			//Random next creation delay
 			// set nextObjectCreationDelay 
-			nextObjectCreationDelay = RandomUtility.random(30, 100);
-			int rnd =  RandomUtility.random(0, 100);
-			if(rnd<30) {
-				QuestionMark x = new QuestionMark(x, y, z, speed);
-				onScreenObject.add(x);
-			}
-			else if(rnd<50) {
-				Rosen x = new Rosen(x, y, z, speed);
-				onScreenObject.add(x);
-			}
+			nextObjectCreationDelay = RandomUtility.random(10, 100);
+			QuestionMark x =  new QuestionMark(0, 0, zCounter, 10);
+			onScreenObject.add(x);
+			renderManager.add(x);
+			Player.setStressLevel(Player.getStressLevel()+20);
+			System.out.println(Player.getStressLevel());
 			//Increase z counter (so the next object will be created on top of the previous one)
 			zCounter++;
 			if(zCounter == Integer.MAX_VALUE-1){
@@ -87,32 +82,10 @@ public class MainLogic {
 		}
 	}
 	
-	private TargetObject getTopMostTargetAt(int x,int y){
-		TargetObject obj = null;
-		for(TargetObject target : onScreenObject){
-			if(target.contains(x, y)){
-				if(obj != null){
-					if(target.getZ() > obj.getZ()){
-						obj.setPointerOver(false);
-						obj = target;
-						obj.setPointerOver(true);
-					}
-				}else{
-					obj = target;
-					obj.setPointerOver(true);
-				}
-			}else{
-				target.setPointerOver(false);
-			}
-		}
-		return obj;
-	}
-
-	
 	public synchronized List<IRenderable> getSortedRenderableObject() {
 		List<IRenderable> sortedRenderable = new ArrayList<IRenderable>();
 		if(!readyToRender) return sortedRenderable;
-		for(TargetObject object : onScreenObject){
+		for(CollidableEntity object : onScreenObject){
 			sortedRenderable.add(object);
 		}
 

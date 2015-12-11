@@ -4,6 +4,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 
 import entity.GameLogic;
+import entity.MainLogic;
 import render.GameScreen;
 import render.RenderManager;
 
@@ -15,7 +16,7 @@ public class Main {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		RenderManager renderManager = new RenderManager();
-		//GameLogic logic = new GameLogic(renderManager);
+		MainLogic logic = new MainLogic(renderManager);
 		JComponent gameScreen = new GameScreen(renderManager);
 		frame.getContentPane().add(gameScreen);
 		frame.pack();
@@ -28,7 +29,8 @@ public class Main {
 			} catch (InterruptedException e) {
 			}
 			gameScreen.repaint();
-			//logic.logicUpdate();
+			gameScreen.validate();
+			logic.logicUpdate();
 		}
 	}
 }

@@ -7,6 +7,7 @@ public abstract class CollidableEntity extends Entity{
 	protected int speed;
 	public CollidableEntity(int x, int y, int z, int speed) {
 		super(x, y, z);
+		this.speed = speed;
 		// TODO Auto-generated constructor stub
 	}
 	

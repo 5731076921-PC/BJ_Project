@@ -9,7 +9,6 @@ public class QuestionMark extends Enemy {
 	public QuestionMark(int x, int y, int z, int speed) {
 		super(x, y, z, speed);
 		// TODO Auto-generated constructor stub
-		
 	}
 
 	@Override
@@ -41,6 +40,7 @@ public class QuestionMark extends Enemy {
 		// TODO Auto-generated method stub
 		x += speed;
 		if(x<0) destroyed = true;
+		System.out.println(speed);
 	}
 
 	@Override

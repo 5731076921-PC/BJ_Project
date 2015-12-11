@@ -15,6 +15,7 @@ import java.util.List;
 import javax.imageio.ImageIO;
 
 import Utility.DrawingUtility;
+import entity.Player;
 
 public class RenderManager {
 	
@@ -51,8 +52,7 @@ public class RenderManager {
 		DrawingUtility.drawBackground(g2d);
 		DrawingUtility.drawScoreBar(g2d);
 		DrawingUtility.drawStudent(g2d);
-		DrawingUtility.drawStressBar(g2d, 5);
-		DrawingUtility.drawQuestionMarkItem(g2d, 15, 0);
+		DrawingUtility.drawStressBar(g2d, Player.getStressLevel());
 		for(IRenderable entity : entities){
 			if(entity.isVisible() && !entity.isDestroyed()){
 				entity.draw(g2d);
