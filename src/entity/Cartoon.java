@@ -65,7 +65,7 @@ public class Cartoon extends Helper {
 	@Override
 	public void hitWithPlayer() {
 		// TODO Auto-generated method stub
-		Player.setStressLevel(Player.getStressLevel() - 20);
+		Player.setStressLevel(Player.getStressLevel() - 40);
 		destroyed = true;
 	}
 

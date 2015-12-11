@@ -35,7 +35,7 @@ public class DrawingUtility {
 	protected static final BufferedImage student = getImage("res/img/player.png");
 	protected static final BufferedImage studentHit = getImage("res/img/player-hit.png");
 	protected static final BufferedImage student2 = getImage("res/img/player-2.png");
-	//protected static final BufferedImage student3 = getImage("res/img/player3.png");
+	protected static final BufferedImage student3 = getImage("res/img/player-3.png");
 	protected static final BufferedImage rosen = getImage("res/img/rosen.png");
 	protected static final BufferedImage f = getImage("res/img/f.png");
 	protected static final BufferedImage sleepyDrug = getImage("res/img/drug.png");
@@ -75,7 +75,7 @@ public class DrawingUtility {
 			g2.drawImage(student2, null, ScreenSize.STUDENTBOUND, 150);
 		}
 		else {
-			g2.drawImage(student2, null, ScreenSize.STUDENTBOUND, 150);
+			g2.drawImage(student3, null, ScreenSize.STUDENTBOUND, 150);
 		}
 	}
 	public static void drawStressBar(Graphics2D g2,int stressLevel) {

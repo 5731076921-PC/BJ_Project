@@ -9,15 +9,13 @@ public class SleepyDrug extends Enemy {
 	private int speedSlow;
 	private boolean hit;
 	private boolean clicked;
-	private int sleepyTime;
 	private int sleepyTimeCount;
 
-	public SleepyDrug(int x, int y, int z, int speed, int speedSlow, int sleepyTime) {
+	public SleepyDrug(int x, int y, int z, int speed, int speedSlow) {
 		super(x, y, z, speed);
 		// TODO Auto-generated constructor stub
 		this.speedSlow = speedSlow;
 		this.hit = false;
-		this.sleepyTime = sleepyTime;
 		this.sleepyTimeCount = 0;
 		this.width = 190;
 		this.height = 67;

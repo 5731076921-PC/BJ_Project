@@ -54,7 +54,7 @@ public class MainLogic {
 		if(Player.isPause()){
 			return;
 		}
-		if(sleep && sleepCounter<=50) {
+		if(sleep && sleepCounter<=150) {
 			sleepCounter++;
 		} else if(sleep) {
 			sleep = !sleep;
@@ -100,13 +100,9 @@ public class MainLogic {
 	
 	private void createTarget(){
 //		Help me generate delay and create sleepy drug, cartoon using this constructor.
-//		SleepyDrug z = new SleepyDrug(0, 350, zCounter, 20, 3, 0);
-//		onScreenObject.add(z);
-//		renderManager.add(z);
+
 		
-//		Cartoon w = new Cartoon(0, ScreenSize.HEIGHT-146, zCounter, 2);
-//		onScreenObject.add(w);
-//		renderManager.add(w);
+
 
 		for (int k = 0; k < nextObjectCreationDelay.length; k++) {
 			if (nextObjectCreationDelay[k] > 0) {
@@ -141,6 +137,20 @@ public class MainLogic {
 				onScreenObject.add(f[i]);
 				renderManager.add(f[i]);
 			}
+		}
+		
+		if(nextObjectCreationDelay[3] <= 0) {
+			nextObjectCreationDelay[3] = RandomUtility.random(500, 700);
+			SleepyDrug z = new SleepyDrug(0, 350, zCounter, 20, 3);
+			onScreenObject.add(z);
+			renderManager.add(z);
+		}
+		
+		if(nextObjectCreationDelay[4] <= 0) {
+			nextObjectCreationDelay[4] = RandomUtility.random(400, 550);
+			Cartoon w = new Cartoon(0, ScreenSize.HEIGHT-146, zCounter, 2);
+			onScreenObject.add(w);
+			renderManager.add(w);
 		}
 		
 			//Increase z counter (so the next object will be created on top of the previous one)
