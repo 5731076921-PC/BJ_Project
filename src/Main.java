@@ -28,7 +28,6 @@ public class Main {
 			} catch (InterruptedException e) {
 			}
 			gameScreen.repaint();
-			gameScreen.validate();
 			logic.logicUpdate();
 		}
 	}

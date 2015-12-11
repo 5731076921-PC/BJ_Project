@@ -1,6 +1,7 @@
 package entity;
 
 import Utility.InputUtility;
+import Utility.ScreenSize;
 
 public abstract class CollidableEntity extends Entity{
 
@@ -35,5 +36,8 @@ public abstract class CollidableEntity extends Entity{
 	}
 	 public void upSpeed() {
 		 this.speed = tempspeed*Player.getLevel();
+	 }
+	 public boolean outOfBound() {
+		 return x+width>= ScreenSize.STUDENTBOUND;
 	 }
 }

@@ -42,7 +42,7 @@ public class FThrow extends Enemy {
 	public void move() {
 		// TODO Auto-generated method stub
 		x += speed;
-		if(x>=ScreenSize.STUDENTBOUND) {
+		if(outOfBound()) {
 			hitWithPlayer();
 		}
 		if(x<0) destroyed = true;

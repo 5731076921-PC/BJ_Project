@@ -22,13 +22,16 @@ public class MainLogic {
 	//InitialDelay: ?, Rosen, F, Drug, Cartoon, Music, Bomb
 	private int[] nextObjectCreationDelay = {30, 60, 600, 350, 650, 800, 1200};	
 	private boolean readyToRender = false; //For dealing with synchronization issue
+	private static boolean hitted;
+	private int hitCounter =0;
 	private RenderManager renderManager;
 	public MainLogic(RenderManager renderManager) {
 		this.renderManager = renderManager;
+		onStart();
 	}
 	//Called before enter the game loop
 	public synchronized void onStart(){
-		
+		hitted = false;
 	}
 	
 	//Called after exit the game loop
@@ -50,6 +53,14 @@ public class MainLogic {
 		//Create random target
 		createTarget();
 		
+		//Change hitted to false after 5 ticks
+		if(hitCounter>0) {
+			hitCounter--;
+		}
+		else { 
+			hitCounter=0;
+			hitted= false;
+		}
 		//Attack
 		if(InputUtility.isMouseLeftDown()) {
 			if(getTopEntity() != null) {
@@ -58,11 +69,14 @@ public class MainLogic {
 			}
 			
 		}
-		System.out.println(Player.getStressLevel());
 		//Update target object
 		for(CollidableEntity obj : onScreenObject){
 			obj.move();
 			obj.upSpeed();
+			if(obj.outOfBound() && hitCounter ==0) {
+				hitted = true;
+				hitCounter = 20;
+			}
 		}
 		
 		//Remove unused image
@@ -123,6 +137,9 @@ public class MainLogic {
 			}
 		}
 		return entity;
+	}
+	public static boolean isHitted() {
+		return hitted;
 	}
 	
 //	public synchronized List<IRenderable> getSortedRenderableObject() {

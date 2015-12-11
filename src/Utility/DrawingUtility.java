@@ -33,10 +33,13 @@ public class DrawingUtility {
 	protected static final BufferedImage questionMarkL = getImage("res/img/questionMark-L.png");
 	protected static final BufferedImage questionMarkR = getImage("res/img/questionMark-R.png");
 	protected static final BufferedImage student = getImage("res/img/player.png");
+	protected static final BufferedImage studentHit = getImage("res/img/player-hit.png");
+	protected static final BufferedImage student2 = getImage("res/img/player-2.png");
+	//protected static final BufferedImage student3 = getImage("res/img/player3.png");
 	protected static final BufferedImage rosen = getImage("res/img/rosen.png");
 	protected static final BufferedImage f = getImage("res/img/f.png");
-//	protected static final BufferedImage sleepyDrug = getImage("res/img/Drug.png");
-//	protected static final BufferedImage sleepyDrugBG = getImage("res/img/SleepingBG.png");
+	protected static final BufferedImage sleepyDrug = getImage("res/img/drug.png");
+	protected static final BufferedImage sleepyDrugBG = getImage("res/img/sleepingBG.png");
 	
 	public static void drawBackground(Graphics2D g2) {
 		g2.clearRect(0, 0, 1200,680);
@@ -55,8 +58,20 @@ public class DrawingUtility {
 		else questionMark = questionMarkR;
 	g2.drawImage(questionMark, null, x, 450);
 	}
-	public static void drawStudent(Graphics2D g2) {
-	g2.drawImage(student, null, ScreenSize.STUDENTBOUND, 150);
+	public static void drawStudent(Graphics2D g2,int level,boolean playerIsHit) {
+		if(playerIsHit) {
+			g2.drawImage(studentHit, null, ScreenSize.STUDENTBOUND, 150);
+			return;
+		}
+		else if(level ==1) {
+			g2.drawImage(student, null, ScreenSize.STUDENTBOUND, 150);
+		}
+		else if(level==2) {
+			g2.drawImage(student2, null, ScreenSize.STUDENTBOUND, 150);
+		}
+		else {
+			g2.drawImage(student2, null, ScreenSize.STUDENTBOUND, 150);
+		}
 	}
 	public static void drawStressBar(Graphics2D g2,int stressLevel) {
 		g2.setColor(Color.WHITE);
@@ -76,13 +91,13 @@ public class DrawingUtility {
 	public static void drawF(Graphics2D g2,int x, int y) {
 		g2.drawImage(f, null, x, y);
 	}
-//	public static void drawSleepyDrug(Graphics2D g2,int x, int y){
-//		g2.drawImage(sleepyDrug, null, x, y);
-//	}
-//	
-//	public static void drawSleepyDrugBG(Graphics2D g2,int x, int y){
-//		g2.drawImage(sleepyDrugBG, null, x, y);
-//	}
+	public static void drawSleepyDrug(Graphics2D g2,int x, int y){
+		g2.drawImage(sleepyDrug, null, x, y);
+	}
+	
+	public static void drawSleepyDrugBG(Graphics2D g2,int x, int y){
+		g2.drawImage(sleepyDrugBG, null, x, y);
+	}
 	
 	
 

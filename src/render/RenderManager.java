@@ -15,6 +15,7 @@ import java.util.List;
 import javax.imageio.ImageIO;
 
 import Utility.DrawingUtility;
+import entity.MainLogic;
 import entity.Player;
 
 public class RenderManager {
@@ -48,10 +49,10 @@ public class RenderManager {
 	}
 	
 	//Will be called by JComponent object
-	public void drawScreen(Graphics2D g2d){
+	public synchronized void drawScreen(Graphics2D g2d){
 		DrawingUtility.drawBackground(g2d);
 		DrawingUtility.drawScoreBar(g2d);
-		DrawingUtility.drawStudent(g2d);
+		DrawingUtility.drawStudent(g2d,Player.getLevel(),MainLogic.isHitted());
 		DrawingUtility.drawStressBar(g2d, Player.getStressLevel());
 		for(IRenderable entity : entities){
 			if(entity.isVisible() && !entity.isDestroyed()){

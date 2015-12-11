@@ -16,8 +16,8 @@ public class Rosen extends Enemy {
 		super(x, y, z, speed);
 		// TODO Auto-generated constructor stub
 		movingDirection = UP_DIRECTION;
-		width = 242;
-		height = 120;
+		width = 216;
+		height = 117;
 		upperBound = y-100;
 		if(upperBound<0) upperBound =0;
 		lowerBound = y;
@@ -58,7 +58,7 @@ public class Rosen extends Enemy {
 		}
 		x += speed;
 		y += speed * movingDirection;
-		if(x>=ScreenSize.STUDENTBOUND) {
+		if(outOfBound()) {
 			hitWithPlayer();
 		}
 		// TODO Auto-generated method stub

@@ -53,7 +53,7 @@ public class QuestionMark extends Enemy {
 		
 		x += speed;
 		if(x<0) destroyed = true;
-		if(x>=ScreenSize.STUDENTBOUND) {
+		if(outOfBound()) {
 			hitWithPlayer();
 		}
 
