@@ -20,10 +20,9 @@ public class MainLogic {
 
 	private int zCounter = Integer.MIN_VALUE + 1;
 	// InitialDelay: ?, Rosen, F, Drug, Cartoon, Music, Bomb
-	private int[] nextObjectCreationDelay = { 30, 60, 600, 350, 650, 100, 1200 };
-	// BACKUP
-	// private int[] nextObjectCreationDelay = {30, 60, 600, 350, 650, 850,
-	// 1200};
+	private int[] nextObjectCreationDelay = {30, 60, 600, 350, 650, 850,1200};
+//  BACKUP
+//	private int[] nextObjectCreationDelay = {30, 60, 600, 350, 650, 850,1200};
 	private boolean readyToRender = false; // For dealing with synchronization
 											// issue
 	private static boolean hitted;
