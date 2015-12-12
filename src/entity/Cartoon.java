@@ -76,7 +76,7 @@ public class Cartoon extends Helper {
 		speed = -20;
 		tempspeed = -20;
 		Player.setScore(Player.getScore()-300);
-
+		clicked = true;
 	}
 
 }

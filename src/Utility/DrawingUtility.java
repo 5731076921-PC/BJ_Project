@@ -50,6 +50,16 @@ public class DrawingUtility {
 			g2.drawImage(bg, null, 0, 0);
 		else
 			g2.drawImage(sleepyDrugBG, null, 0, 0);
+
+	}
+	public static void drawPauseString(Graphics2D g2) {
+		if(Player.isPause()) {
+			int h= (int) g2.getFontMetrics().getStringBounds("PAUSED", g2).getHeight();
+			int w= (int) g2.getFontMetrics().getStringBounds("PAUSED", g2).getWidth();
+			g2.setFont(standardFont);
+			g2.setColor(Color.RED);
+			g2.drawString("PAUSED", ScreenSize.WIDTH/2-w, ScreenSize.HEIGHT/2-h);
+		}
 	}
 	public static void drawScoreBar(Graphics2D g2) {
 		g2.setColor(Color.WHITE);

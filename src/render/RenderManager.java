@@ -59,5 +59,6 @@ public class RenderManager {
 				entity.draw(g2d);
 			}
 		}
+		DrawingUtility.drawPauseString(g2d);
 	}
 }

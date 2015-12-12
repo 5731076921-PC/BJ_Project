@@ -79,7 +79,7 @@ public class Rosen extends Enemy {
 		speed = -20;
 		tempspeed = -20;
 		Player.setScore(Player.getScore()+250);
-
+		clicked = true;
 	}
 
 }

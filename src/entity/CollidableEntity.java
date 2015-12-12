@@ -9,22 +9,14 @@ public abstract class CollidableEntity extends Entity{
 	protected int width,height;
 	protected int speed;
 	protected int tempspeed;
-	
+	protected boolean clicked;
 	public CollidableEntity(int x, int y, int z, int speed) {
 		super(x, y, z);
 		this.speed = speed;
 		this.tempspeed = speed;
 		// TODOa Auto-generated constructor stub
 	}
-	
-//	protected boolean collideWith(CollidableEntity other){
-//		return Math.hypot(this.x-other.x, this.y-other.y) <= this.radius+other.radius;
-//	}
-//	public void hitWithOther(Helper e){
-//		if(this instanceof Enemy && this.collideWith(e)) {
-//			e.destroyed = false;
-//		}
-//	}
+
 	public abstract void move();
 	public boolean isMouseOver() {
 		if(InputUtility.getMouseX()<= x+width) {
@@ -35,7 +27,9 @@ public abstract class CollidableEntity extends Entity{
 		return false;
 	}
 	 public void upSpeed() {
+		 if(!clicked)
 		 this.speed = tempspeed*Player.getLevel();
+		 if(MainLogic.isRelax() && !clicked) this.speed = 2;
 	 }
 	 public boolean outOfBound() {
 		 return x+width>= ScreenSize.STUDENTBOUND;

@@ -7,19 +7,13 @@ import Utility.ScreenSize;
 
 public class SleepyDrug extends Enemy {
 	private int speedSlow;
-	private boolean hit;
-	private boolean clicked;
-	private int sleepyTimeCount;
 
 	public SleepyDrug(int x, int y, int z, int speed, int speedSlow) {
 		super(x, y, z, speed);
 		// TODO Auto-generated constructor stub
 		this.speedSlow = speedSlow;
-		this.hit = false;
-		this.sleepyTimeCount = 0;
 		this.width = 190;
 		this.height = 67;
-		this.clicked = false;
 	}
 
 	@Override
@@ -56,7 +50,7 @@ public class SleepyDrug extends Enemy {
 				x += speedSlow;
 			}
 		} else {
-			x -= speed;
+			x += speed;
 		}
 		if (x < 0)
 			destroyed = true;

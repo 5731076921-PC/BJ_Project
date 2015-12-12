@@ -71,6 +71,7 @@ public class QuestionMark extends Enemy {
 		// TODO Auto-generated method stub
 		speed = -20;
 		tempspeed = -20;
+		clicked = true;
 		Player.setScore(Player.getScore()+150);
 	}
 

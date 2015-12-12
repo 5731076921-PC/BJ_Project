@@ -13,103 +13,122 @@ import Utility.ScreenSize;
 import render.IRenderable;
 import render.RenderManager;
 
-
-
 public class MainLogic {
 
-	//All renderable objects
+	// All renderable objects
 	private List<CollidableEntity> onScreenObject = new ArrayList<CollidableEntity>();
 
-	private int zCounter = Integer.MIN_VALUE+1;
-	//InitialDelay: ?, Rosen, F, Drug, Cartoon, Music, Bomb
-	private int[] nextObjectCreationDelay = {30, 60, 600, 350, 650, 850, 1200};	
-	private boolean readyToRender = false; //For dealing with synchronization issue
+	private int zCounter = Integer.MIN_VALUE + 1;
+	// InitialDelay: ?, Rosen, F, Drug, Cartoon, Music, Bomb
+	private int[] nextObjectCreationDelay = { 30, 60, 600, 350, 650, 100, 1200 };
+	// BACKUP
+	// private int[] nextObjectCreationDelay = {30, 60, 600, 350, 650, 850,
+	// 1200};
+	private boolean readyToRender = false; // For dealing with synchronization
+											// issue
 	private static boolean hitted;
 	private static boolean sleep;
-	private int hitCounter =0;
-	private static int sleepCounter =0;
+	private static boolean bomb;
+	private static boolean relax;
+	private int hitCounter = 0;
+	private int sleepCounter = 0;
+	private int relaxCounter = 0;
 	private RenderManager renderManager;
+
 	public MainLogic(RenderManager renderManager) {
 		this.renderManager = renderManager;
 		onStart();
 	}
-	//Called before enter the game loop
-	public synchronized void onStart(){
+
+	// Called before enter the game loop
+	public synchronized void onStart() {
 		hitted = false;
 		sleep = false;
 		AudioUtility.playSound("bg");
 	}
-	
-	//Called after exit the game loop
-	public synchronized void onExit(){
+
+	// Called after exit the game loop
+	public synchronized void onExit() {
 		readyToRender = false;
 		onScreenObject.clear();
 	}
-	
-	public void logicUpdate(){
-		//Paused
-		if(InputUtility.getKeyTriggered(KeyEvent.VK_ENTER)){
+
+	public void logicUpdate() {
+		// Paused
+		if (InputUtility.getKeyTriggered(KeyEvent.VK_ENTER)) {
 			Player.setPause(!Player.isPause());
 			InputUtility.setKeyTriggered(KeyEvent.VK_ENTER, false);
 		}
-		
-		if(Player.isPause()){
+
+		if (Player.isPause()) {
 			return;
 		}
-		if(sleep && sleepCounter<=150) {
+		if (sleep && sleepCounter <= 150) {
 			sleepCounter++;
-		} else if(sleep) {
+		} else if (sleep) {
 			sleep = !sleep;
-			sleepCounter= 0;
+			sleepCounter = 0;
 		}
-		
-				
-		//Create random target
+		if (relax && relaxCounter == 0) {
+			AudioUtility.playMusicBg(relax);
+		}
+		if (relax && relaxCounter <= 1400) {
+			relaxCounter++;
+		} else if (relax) {
+			relax = !relax;
+			relaxCounter = 0;
+			AudioUtility.playMusicBg(relax);
+		}
+
+		// Create random target
 		createTarget();
-		
-		//Change hitted to false after 5 ticks
-		if(hitCounter>0) {
+
+		// Change hitted to false after 5 ticks
+		if (hitCounter > 0) {
 			hitCounter--;
+		} else {
+			hitCounter = 0;
+			hitted = false;
 		}
-		else { 
-			hitCounter=0;
-			hitted= false;
-		}
-		//Attack
-		if(InputUtility.isMouseLeftDown() && !sleep) {
-			if(getTopEntity() != null) {
+		// Attack
+		if (InputUtility.isMouseLeftDown() && !sleep) {
+			if (getTopEntity() != null) {
 				getTopEntity().onClick();
 				InputUtility.setMouseLeftDown(false);
 			}
-			
+
 		}
-		//Update target object
-		for(CollidableEntity obj : onScreenObject){
+		// Update target object
+		for (CollidableEntity obj : onScreenObject) {
+			if (isBomb())
+				obj.destroyed = true;
 			obj.move();
 			obj.upSpeed();
-			if(obj.outOfBound() && hitCounter ==0) {
+			if (obj.outOfBound() && hitCounter == 0) {
 				hitted = true;
 				hitCounter = 20;
 			}
 		}
-		
-		//Remove unused image
-		for(int i=onScreenObject.size()-1; i>=0; i--){
-			if(onScreenObject.get(i).isDestroyed())
+		// setBomb false after destroyed all object
+		setBomb(false);
+
+		// Remove unused image
+		for (int i = onScreenObject.size() - 1; i >= 0; i--) {
+			if (onScreenObject.get(i).isDestroyed())
 				onScreenObject.remove(i);
 		}
 	}
-	
-	private void createTarget(){
+
+	private void createTarget() {
 
 		for (int k = 0; k < nextObjectCreationDelay.length; k++) {
 			if (nextObjectCreationDelay[k] > 0) {
 				nextObjectCreationDelay[k]--;
-			} 
-		}	
+			}
+		}
 
-				// Random next creation delay
-				// set nextObjectCreationDelay
+		// Random next creation delay
+		// set nextObjectCreationDelay
 		if (nextObjectCreationDelay[0] <= 0) {
 			nextObjectCreationDelay[0] = RandomUtility.random(10, 70);
 			QuestionMark x = new QuestionMark(0, 450, zCounter, 3);
@@ -136,82 +155,102 @@ public class MainLogic {
 				renderManager.add(f[i]);
 			}
 		}
-		
-		if(nextObjectCreationDelay[3] <= 0) {
+
+		if (nextObjectCreationDelay[3] <= 0) {
 			nextObjectCreationDelay[3] = RandomUtility.random(500, 700);
 			SleepyDrug z = new SleepyDrug(0, 350, zCounter, 20, 3);
 			onScreenObject.add(z);
 			renderManager.add(z);
 		}
-		
-		if(nextObjectCreationDelay[4] <= 0) {
+
+		if (nextObjectCreationDelay[4] <= 0) {
 			nextObjectCreationDelay[4] = RandomUtility.random(400, 550);
-			Cartoon w = new Cartoon(0, ScreenSize.HEIGHT-146, zCounter, 2);
+			Cartoon w = new Cartoon(0, ScreenSize.HEIGHT - 146, zCounter, 2);
 			onScreenObject.add(w);
 			renderManager.add(w);
 		}
-		
-		if(nextObjectCreationDelay[5] <= 0) {
+
+		if (nextObjectCreationDelay[5] <= 0) {
 			nextObjectCreationDelay[5] = RandomUtility.random(650, 800);
-			Music m = new Music(0, ScreenSize.HEIGHT-146, zCounter, 2);
+			Music m = new Music(0, ScreenSize.HEIGHT - 146, zCounter, 2);
 			onScreenObject.add(m);
 			renderManager.add(m);
 		}
-		
-		if(nextObjectCreationDelay[6] <= 0) {
+
+		if (nextObjectCreationDelay[6] <= 0) {
 			nextObjectCreationDelay[6] = RandomUtility.random(800, 1100);
-			Bomb b = new Bomb(0, ScreenSize.HEIGHT-146, zCounter, 2);
+			Bomb b = new Bomb(0, ScreenSize.HEIGHT - 146, zCounter, 2);
 			onScreenObject.add(b);
 			renderManager.add(b);
 		}
-		
-			//Increase z counter (so the next object will be created on top of the previous one)
-			zCounter++;
-			if(zCounter == Integer.MAX_VALUE-1){
-				zCounter = Integer.MIN_VALUE+1;
-			}
+
+		// Increase z counter (so the next object will be created on top of the
+		// previous one)
+		zCounter++;
+		if (zCounter == Integer.MAX_VALUE - 1) {
+			zCounter = Integer.MIN_VALUE + 1;
 		}
+	}
 
 	public CollidableEntity getTopEntity() {
-		int z =Integer.MIN_VALUE;
+		int z = Integer.MIN_VALUE;
 		CollidableEntity entity = null;
-		for(CollidableEntity e : onScreenObject) {
-			if(e.getZ()>z && e.isMouseOver()) {
-				z= e.getZ();
+		for (CollidableEntity e : onScreenObject) {
+			if (e.getZ() > z && e.isMouseOver()) {
+				z = e.getZ();
 				entity = e;
 			}
 		}
 		return entity;
 	}
+
 	public static boolean isHitted() {
 		return hitted;
 	}
+
 	public static boolean isSleep() {
 		return sleep;
 	}
+
 	public static void setSleep(boolean sleep) {
 		MainLogic.sleep = sleep;
 	}
-	
-//	public synchronized List<IRenderable> getSortedRenderableObject() {
-//		List<IRenderable> sortedRenderable = new ArrayList<IRenderable>();
-//		if(!readyToRender) return sortedRenderable;
-//		for(CollidableEntity object : onScreenObject){
-//			sortedRenderable.add(object);
-//		}
-//
-//		
-//		Collections.sort(sortedRenderable, new Comparator<IRenderable>() {
-//			@Override
-//			public int compare(IRenderable o1, IRenderable o2) {
-//				if(o1.getZ() > o2.getZ())
-//					return 1;
-//				else if(o1.getZ() < o2.getZ())
-//					return -1;
-//				else
-//					return 0;
-//			}
-//		});
-//		return sortedRenderable;
-//	}
+
+	public static boolean isBomb() {
+		return bomb;
+	}
+
+	public static void setBomb(boolean bomb) {
+		MainLogic.bomb = bomb;
+	}
+
+	public static boolean isRelax() {
+		return relax;
+	}
+
+	public static void setRelax(boolean relax) {
+		MainLogic.relax = relax;
+	}
+
+	// public synchronized List<IRenderable> getSortedRenderableObject() {
+	// List<IRenderable> sortedRenderable = new ArrayList<IRenderable>();
+	// if(!readyToRender) return sortedRenderable;
+	// for(CollidableEntity object : onScreenObject){
+	// sortedRenderable.add(object);
+	// }
+	//
+	//
+	// Collections.sort(sortedRenderable, new Comparator<IRenderable>() {
+	// @Override
+	// public int compare(IRenderable o1, IRenderable o2) {
+	// if(o1.getZ() > o2.getZ())
+	// return 1;
+	// else if(o1.getZ() < o2.getZ())
+	// return -1;
+	// else
+	// return 0;
+	// }
+	// });
+	// return sortedRenderable;
+	// }
 }

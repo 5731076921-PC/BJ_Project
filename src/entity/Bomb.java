@@ -69,6 +69,7 @@ public class Bomb extends Helper {
 		// TODO Auto-generated method stub
 		
 		//remove all the CollidableEntities
+		MainLogic.setBomb(true);
 		AudioUtility.playSound("bomb");
 		destroyed = true;
 	}
@@ -80,7 +81,7 @@ public class Bomb extends Helper {
 		speed = -20;
 		tempspeed = -20;
 		Player.setScore(Player.getScore()-500);
-
+		clicked = true;
 	}
 
 }

@@ -67,7 +67,7 @@ public class Music extends Helper {
 	public void hitWithPlayer() {
 		// TODO Auto-generated method stub
 		// slow map & pause Bgmusic for 1400 ticks & play relaxing sound
-//		AudioUtility.playSound("relax");
+		MainLogic.setRelax(true);
 		destroyed = true;
 	}
 
@@ -78,7 +78,7 @@ public class Music extends Helper {
 		speed = -20;
 		tempspeed = -20;
 		Player.setScore(Player.getScore()-200);
-
+		clicked = true;
 	}
 
 }

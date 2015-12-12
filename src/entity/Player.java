@@ -1,5 +1,4 @@
 package entity;
-//s
 import java.awt.Graphics2D;
 
 import org.w3c.dom.Entity;
@@ -44,13 +43,15 @@ private static boolean pause;
 	public static void setStressLevel(int stressLevel) {
 		if(stressLevel >100) {
 			Player.stressLevel =0;
-		if(stressLevel <= 0) Player.stressLevel = 0;
 			if(level<3) {
 				level++;
 			}
 
 		}
-		else Player.stressLevel = stressLevel;
+		else if(stressLevel < 0) 
+			Player.stressLevel = 0; 
+		else 
+			Player.stressLevel = stressLevel;
 	}
 
 	public static boolean isPause() {

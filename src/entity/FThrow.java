@@ -61,6 +61,7 @@ public class FThrow extends Enemy {
 		speed = -20;
 		tempspeed = -20;
 		Player.setScore(Player.getScore()+100);
+		clicked = true;
 	}
 
 }
