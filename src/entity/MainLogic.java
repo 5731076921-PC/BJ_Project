@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import Utility.AudioUtility;
 import Utility.InputUtility;
 import Utility.RandomUtility;
 import Utility.ScreenSize;
@@ -21,7 +22,7 @@ public class MainLogic {
 
 	private int zCounter = Integer.MIN_VALUE+1;
 	//InitialDelay: ?, Rosen, F, Drug, Cartoon, Music, Bomb
-	private int[] nextObjectCreationDelay = {30, 60, 600, 350, 650, 800, 1200};	
+	private int[] nextObjectCreationDelay = {30, 60, 600, 350, 650, 850, 1200};	
 	private boolean readyToRender = false; //For dealing with synchronization issue
 	private static boolean hitted;
 	private static boolean sleep;
@@ -36,6 +37,7 @@ public class MainLogic {
 	public synchronized void onStart(){
 		hitted = false;
 		sleep = false;
+		AudioUtility.playSound("bg");
 	}
 	
 	//Called after exit the game loop
@@ -99,10 +101,6 @@ public class MainLogic {
 	}
 	
 	private void createTarget(){
-//		Help me generate delay and create sleepy drug, cartoon using this constructor.
-
-		
-
 
 		for (int k = 0; k < nextObjectCreationDelay.length; k++) {
 			if (nextObjectCreationDelay[k] > 0) {
@@ -120,7 +118,7 @@ public class MainLogic {
 
 		}
 		if (nextObjectCreationDelay[1] <= 0) {
-			nextObjectCreationDelay[1] = RandomUtility.random(40, 90);
+			nextObjectCreationDelay[1] = RandomUtility.random(50, 90);
 			Rosen y = new Rosen(0, RandomUtility.random(100, 400), zCounter, 5);
 			onScreenObject.add(y);
 			renderManager.add(y);
@@ -151,6 +149,20 @@ public class MainLogic {
 			Cartoon w = new Cartoon(0, ScreenSize.HEIGHT-146, zCounter, 2);
 			onScreenObject.add(w);
 			renderManager.add(w);
+		}
+		
+		if(nextObjectCreationDelay[5] <= 0) {
+			nextObjectCreationDelay[5] = RandomUtility.random(650, 800);
+			Music m = new Music(0, ScreenSize.HEIGHT-146, zCounter, 2);
+			onScreenObject.add(m);
+			renderManager.add(m);
+		}
+		
+		if(nextObjectCreationDelay[6] <= 0) {
+			nextObjectCreationDelay[6] = RandomUtility.random(800, 1100);
+			Bomb b = new Bomb(0, ScreenSize.HEIGHT-146, zCounter, 2);
+			onScreenObject.add(b);
+			renderManager.add(b);
 		}
 		
 			//Increase z counter (so the next object will be created on top of the previous one)

@@ -2,6 +2,7 @@ package entity;
 
 import java.awt.Graphics2D;
 
+import Utility.AudioUtility;
 import Utility.DrawingUtility;
 import Utility.ScreenSize;
 
@@ -65,7 +66,8 @@ public class Music extends Helper {
 	@Override
 	public void hitWithPlayer() {
 		// TODO Auto-generated method stub
-		Player.setLevel(Player.getLevel()-1);
+		// slow map & pause Bgmusic for 1400 ticks & play relaxing sound
+//		AudioUtility.playSound("relax");
 		destroyed = true;
 	}
 

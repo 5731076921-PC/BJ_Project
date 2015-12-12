@@ -44,6 +44,7 @@ private static boolean pause;
 	public static void setStressLevel(int stressLevel) {
 		if(stressLevel >100) {
 			Player.stressLevel =0;
+		if(stressLevel <= 0) Player.stressLevel = 0;
 			if(level<3) {
 				level++;
 			}
