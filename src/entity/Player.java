@@ -3,6 +3,7 @@ import java.awt.Graphics2D;
 
 import org.w3c.dom.Entity;
 
+import exception.ScoreException;
 import render.IRenderable;
 
 public class Player {
@@ -21,9 +22,12 @@ private static boolean pause;
 		return score;
 	}
 
-	public static void setScore(int score) {
+	public static void setScore(int score) /*throws ScoreException*/ {
 		Player.score = score;
-		if(score<0) Player.score =0;
+		if(Player.score <0) {
+			Player.score=0;
+			// throw new ScoreException();
+		}
 	}
 
 	public static int getLevel() {

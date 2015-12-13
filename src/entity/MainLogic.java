@@ -6,12 +6,12 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import Utility.AudioUtility;
-import Utility.InputUtility;
-import Utility.RandomUtility;
-import Utility.ScreenSize;
 import render.IRenderable;
 import render.RenderManager;
+import utility.AudioUtility;
+import utility.InputUtility;
+import utility.RandomUtility;
+import utility.ScreenSize;
 
 public class MainLogic {
 
@@ -20,9 +20,9 @@ public class MainLogic {
 
 	private int zCounter = Integer.MIN_VALUE + 1;
 	// InitialDelay: ?, Rosen, F, Drug, Cartoon, Music, Bomb
-	private int[] nextObjectCreationDelay = {30, 60, 600, 350, 650, 850,1200};
-//  BACKUP
-//	private int[] nextObjectCreationDelay = {30, 60, 600, 350, 650, 850,1200};
+	private int[] nextObjectCreationDelay = { 30, 60, 600, 350, 650, 850, 1200 };
+	// BACKUP
+	// private int[] nextObjectCreationDelay = {30, 60, 600, 350, 650,850,1200};
 	private boolean readyToRender = false; // For dealing with synchronization
 											// issue
 	private static boolean hitted;
@@ -98,23 +98,26 @@ public class MainLogic {
 
 		}
 		// Update target object
-		for (CollidableEntity obj : onScreenObject) {
-			if (isBomb())
-				obj.destroyed = true;
-			obj.move();
-			obj.upSpeed();
-			if (obj.outOfBound() && hitCounter == 0) {
-				hitted = true;
-				hitCounter = 20;
+		synchronized (renderManager) {
+			for (CollidableEntity obj : onScreenObject) {
+				if (isBomb())
+					obj.destroyed = true;
+				obj.move();
+				obj.upSpeed();
+				if (obj.outOfBound() && hitCounter == 0) {
+					hitted = true;
+					hitCounter = 20;
+				}
 			}
-		}
-		// setBomb false after destroyed all object
-		setBomb(false);
+			// setBomb false after destroyed all object
+			setBomb(false);
 
-		// Remove unused image
-		for (int i = onScreenObject.size() - 1; i >= 0; i--) {
-			if (onScreenObject.get(i).isDestroyed())
-				onScreenObject.remove(i);
+			// Remove unused image
+			for (int i = onScreenObject.size() - 1; i >= 0; i--) {
+				if (onScreenObject.get(i).isDestroyed())
+					onScreenObject.remove(i);
+			}
+			renderManager.notify();
 		}
 	}
 
@@ -125,7 +128,6 @@ public class MainLogic {
 				nextObjectCreationDelay[k]--;
 			}
 		}
-
 		// Random next creation delay
 		// set nextObjectCreationDelay
 		if (nextObjectCreationDelay[0] <= 0) {

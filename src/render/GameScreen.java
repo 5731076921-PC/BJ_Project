@@ -11,7 +11,7 @@ import java.awt.event.MouseMotionListener;
 
 import javax.swing.JComponent;
 
-import Utility.InputUtility;
+import utility.InputUtility;
 
 
 public class GameScreen extends JComponent{

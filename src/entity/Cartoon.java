@@ -2,8 +2,8 @@ package entity;
 
 import java.awt.Graphics2D;
 
-import Utility.DrawingUtility;
-import Utility.ScreenSize;
+import utility.DrawingUtility;
+import utility.ScreenSize;
 
 public class Cartoon extends Helper {
 	private int upperBound = 0;

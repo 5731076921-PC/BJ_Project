@@ -1,4 +1,4 @@
-package Utility;
+package utility;
 
 public class ScreenSize {
 	public static final int WIDTH = 1200;

@@ -14,9 +14,9 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
-import Utility.DrawingUtility;
 import entity.MainLogic;
 import entity.Player;
+import utility.DrawingUtility;
 
 public class RenderManager {
 	
@@ -60,5 +60,11 @@ public class RenderManager {
 			}
 		}
 		DrawingUtility.drawPauseString(g2d);
+		try {
+			this.wait();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

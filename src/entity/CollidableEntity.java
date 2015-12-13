@@ -1,7 +1,7 @@
 package entity;
 
-import Utility.InputUtility;
-import Utility.ScreenSize;
+import utility.InputUtility;
+import utility.ScreenSize;
 
 public abstract class CollidableEntity extends Entity{
 

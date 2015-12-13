@@ -2,9 +2,9 @@ package entity;
 
 import java.awt.Graphics2D;
 
-import Utility.DrawingUtility;
-import Utility.InputUtility;
-import Utility.ScreenSize;
+import utility.DrawingUtility;
+import utility.InputUtility;
+import utility.ScreenSize;
 
 public class QuestionMark extends Enemy {	
 	private int direction;

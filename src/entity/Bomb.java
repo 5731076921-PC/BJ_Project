@@ -2,9 +2,9 @@ package entity;
 
 import java.awt.Graphics2D;
 
-import Utility.AudioUtility;
-import Utility.DrawingUtility;
-import Utility.ScreenSize;
+import utility.AudioUtility;
+import utility.DrawingUtility;
+import utility.ScreenSize;
 
 public class Bomb extends Helper {
 	private int upperBound = 0;
