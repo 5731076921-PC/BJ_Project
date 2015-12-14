@@ -1,23 +1,27 @@
 package ui;
+import java.awt.Dimension;
+
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class GameWindow extends JFrame{
 
-	private JPanel currentScene;
+	private JComponent currentScene;
 	
-	protected GameWindow(JPanel scene){
+	public GameWindow(JComponent scene){
 		super("Let's Take a Break!");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 		this.currentScene = scene;
 		getContentPane().add(currentScene);
-		pack();
+		this.pack();
+		this.setSize(new Dimension(1200, 680));
 		setVisible(true);
 		currentScene.requestFocus();
 	}
 	
-	protected void switchScene(JPanel scene){
+	public void switchScene(JComponent scene){
 		getContentPane().remove(currentScene);
 		this.currentScene = scene;
 		getContentPane().add(currentScene);
@@ -26,7 +30,7 @@ public class GameWindow extends JFrame{
 		currentScene.requestFocus();
 	}
 	
-	protected JPanel getCurrentScene(){
+	public JComponent getCurrentScene(){
 		return currentScene;
 	}
 }

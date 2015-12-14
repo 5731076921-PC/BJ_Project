@@ -22,6 +22,7 @@ public class GameScreen extends JComponent{
 		super();
 		setDoubleBuffered(true);
 		this.renderManager = renderManager;
+		this.setPreferredSize(new Dimension(1200, 680));
 		setVisible(true);
 		addListener();
 	}

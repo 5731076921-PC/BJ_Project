@@ -60,6 +60,7 @@ public class RenderManager {
 			}
 		}
 		DrawingUtility.drawPauseString(g2d);
+		this.update();
 		try {
 			this.wait();
 		} catch (InterruptedException e) {

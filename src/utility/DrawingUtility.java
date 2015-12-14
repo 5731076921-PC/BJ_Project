@@ -65,7 +65,7 @@ public class DrawingUtility {
 		g2.setColor(Color.WHITE);
 		g2.setFont(standardFont);
 		int h= (int) g2.getFontMetrics().getStringBounds("SCORE", g2).getHeight();
-		g2.drawString("SCORE: " + Player.getScore() , ScreenSize.WIDTH*8/10, h);
+		g2.drawString("SCORE: "+ Player.getScore()  , ScreenSize.WIDTH*7/9, h);
 	}
 	public static void drawQuestionMarkItem(Graphics2D g2,int x,int direction) {
 		BufferedImage questionMark;

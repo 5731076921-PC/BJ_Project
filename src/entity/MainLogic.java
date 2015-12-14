@@ -16,15 +16,13 @@ import utility.ScreenSize;
 public class MainLogic {
 
 	// All renderable objects
-	private List<CollidableEntity> onScreenObject = new ArrayList<CollidableEntity>();
+	private List<Entity> onScreenObject = new ArrayList<Entity>();
 
 	private int zCounter = Integer.MIN_VALUE + 1;
 	// InitialDelay: ?, Rosen, F, Drug, Cartoon, Music, Bomb
 	private int[] nextObjectCreationDelay = { 30, 60, 600, 350, 650, 850, 1200 };
 	// BACKUP
 	// private int[] nextObjectCreationDelay = {30, 60, 600, 350, 650,850,1200};
-	private boolean readyToRender = false; // For dealing with synchronization
-											// issue
 	private static boolean hitted;
 	private static boolean sleep;
 	private static boolean bomb;
@@ -48,7 +46,6 @@ public class MainLogic {
 
 	// Called after exit the game loop
 	public synchronized void onExit() {
-		readyToRender = false;
 		onScreenObject.clear();
 	}
 
@@ -99,7 +96,7 @@ public class MainLogic {
 		}
 		// Update target object
 		synchronized (renderManager) {
-			for (CollidableEntity obj : onScreenObject) {
+			for (Entity obj : onScreenObject) {
 				if (isBomb())
 					obj.destroyed = true;
 				obj.move();
@@ -132,6 +129,7 @@ public class MainLogic {
 		// set nextObjectCreationDelay
 		if (nextObjectCreationDelay[0] <= 0) {
 			nextObjectCreationDelay[0] = RandomUtility.random(10, 70);
+			if(relax) nextObjectCreationDelay[0] *=2;
 			QuestionMark x = new QuestionMark(0, 450, zCounter, 3);
 			onScreenObject.add(x);
 			renderManager.add(x);
@@ -139,6 +137,7 @@ public class MainLogic {
 		}
 		if (nextObjectCreationDelay[1] <= 0) {
 			nextObjectCreationDelay[1] = RandomUtility.random(50, 90);
+			if(relax) nextObjectCreationDelay[0] *=2;
 			Rosen y = new Rosen(0, RandomUtility.random(100, 400), zCounter, 5);
 			onScreenObject.add(y);
 			renderManager.add(y);
@@ -147,6 +146,7 @@ public class MainLogic {
 
 		if (nextObjectCreationDelay[2] <= 0) {
 			nextObjectCreationDelay[2] = RandomUtility.random(500, 850);
+			if(relax) nextObjectCreationDelay[0] *=2;
 			FThrow f[] = new FThrow[5];
 			for (int i = 0; i < f.length; i++) {
 				f[i] = new FThrow(0, 90 * i, zCounter, 4);
@@ -159,6 +159,7 @@ public class MainLogic {
 
 		if (nextObjectCreationDelay[3] <= 0) {
 			nextObjectCreationDelay[3] = RandomUtility.random(500, 700);
+			if(relax) nextObjectCreationDelay[0] *=2;
 			SleepyDrug z = new SleepyDrug(0, 350, zCounter, 20, 3);
 			onScreenObject.add(z);
 			renderManager.add(z);
@@ -166,6 +167,7 @@ public class MainLogic {
 
 		if (nextObjectCreationDelay[4] <= 0) {
 			nextObjectCreationDelay[4] = RandomUtility.random(400, 550);
+			if(relax) nextObjectCreationDelay[0] *=2;
 			Cartoon w = new Cartoon(0, ScreenSize.HEIGHT - 146, zCounter, 2);
 			onScreenObject.add(w);
 			renderManager.add(w);
@@ -173,6 +175,7 @@ public class MainLogic {
 
 		if (nextObjectCreationDelay[5] <= 0) {
 			nextObjectCreationDelay[5] = RandomUtility.random(650, 800);
+			if(relax) nextObjectCreationDelay[0] *=2;
 			Music m = new Music(0, ScreenSize.HEIGHT - 146, zCounter, 2);
 			onScreenObject.add(m);
 			renderManager.add(m);
@@ -180,6 +183,7 @@ public class MainLogic {
 
 		if (nextObjectCreationDelay[6] <= 0) {
 			nextObjectCreationDelay[6] = RandomUtility.random(800, 1100);
+			if(relax) nextObjectCreationDelay[0] *=2;
 			Bomb b = new Bomb(0, ScreenSize.HEIGHT - 146, zCounter, 2);
 			onScreenObject.add(b);
 			renderManager.add(b);
@@ -193,10 +197,10 @@ public class MainLogic {
 		}
 	}
 
-	public CollidableEntity getTopEntity() {
+	public Entity getTopEntity() {
 		int z = Integer.MIN_VALUE;
-		CollidableEntity entity = null;
-		for (CollidableEntity e : onScreenObject) {
+		Entity entity = null;
+		for (Entity e : onScreenObject) {
 			if (e.getZ() > z && e.isMouseOver()) {
 				z = e.getZ();
 				entity = e;
@@ -232,6 +236,8 @@ public class MainLogic {
 	public static void setRelax(boolean relax) {
 		MainLogic.relax = relax;
 	}
+
+
 
 	// public synchronized List<IRenderable> getSortedRenderableObject() {
 	// List<IRenderable> sortedRenderable = new ArrayList<IRenderable>();
