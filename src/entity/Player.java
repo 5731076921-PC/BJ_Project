@@ -3,6 +3,7 @@ import java.awt.Graphics2D;
 
 import org.w3c.dom.Entity;
 
+import exception.GameOverException;
 import exception.ScoreException;
 import render.IRenderable;
 
@@ -12,7 +13,8 @@ private static  int score;
 private static int level = 1;
 private static int stressLevel;
 private static boolean pause;
-
+private static boolean gameOver;
+private static int tempScore;
 	public Player() {
 		super();
 		this.score = 0;
@@ -21,7 +23,14 @@ private static boolean pause;
 	public static int getScore() {
 		return score;
 	}
-
+	public static void clear() {
+		tempScore=score;
+		score=0;
+		level=1;
+		pause=false;
+		gameOver=false;
+		stressLevel =0;
+	}
 	public static void setScore(int score) /*throws ScoreException*/ {
 		Player.score = score;
 		if(Player.score <0) {
@@ -34,9 +43,9 @@ private static boolean pause;
 		return level;
 	}
 
-	public static void setLevel(int level) {
+	public static void setLevel(int level) throws GameOverException {
 		Player.level = level;
-		if(level>3) Player.level =3;
+		if(level>3) throw new GameOverException();
 		else if(level<0) Player.level =0;
 	}
 
@@ -47,8 +56,12 @@ private static boolean pause;
 	public static void setStressLevel(int stressLevel) {
 		if(stressLevel >100) {
 			Player.stressLevel =0;
-			if(level<3) {
-				level++;
+			try {
+				setLevel(getLevel()+1);
+			} catch (GameOverException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				gameOver = true;
 			}
 
 		}
@@ -64,6 +77,9 @@ private static boolean pause;
 
 	public static void setPause(boolean pause) {
 		Player.pause = pause;
+	}
+	public static boolean isGameOver() {
+		return gameOver;
 	}
 
 

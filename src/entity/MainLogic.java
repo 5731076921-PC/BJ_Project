@@ -47,9 +47,14 @@ public class MainLogic {
 	// Called after exit the game loop
 	public synchronized void onExit() {
 		onScreenObject.clear();
+		renderManager.clear();
 	}
 
 	public void logicUpdate() {
+		if(Player.isGameOver()) {
+			onExit();
+			return;
+		}
 		// Paused
 		if (InputUtility.getKeyTriggered(KeyEvent.VK_ENTER)) {
 			Player.setPause(!Player.isPause());
@@ -94,6 +99,7 @@ public class MainLogic {
 			}
 
 		}
+
 		// Update target object
 		synchronized (renderManager) {
 			for (Entity obj : onScreenObject) {

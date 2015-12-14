@@ -47,7 +47,9 @@ public class RenderManager {
 		}
 		
 	}
-	
+	public void clear() {
+		entities.clear();
+	}
 	//Will be called by JComponent object
 	public synchronized void drawScreen(Graphics2D g2d){
 		DrawingUtility.drawBackground(g2d,MainLogic.isSleep());

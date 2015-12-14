@@ -16,7 +16,6 @@ public class GameWindow extends JFrame{
 		this.currentScene = scene;
 		getContentPane().add(currentScene);
 		this.pack();
-		this.setSize(new Dimension(1200, 680));
 		setVisible(true);
 		currentScene.requestFocus();
 	}
