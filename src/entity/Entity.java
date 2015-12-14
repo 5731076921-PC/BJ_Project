@@ -1,5 +1,6 @@
 package entity;
 
+import exception.GameOverException;
 import render.IRenderable;
 import utility.InputUtility;
 import utility.ScreenSize;

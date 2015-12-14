@@ -71,8 +71,9 @@ public class TitleScreen extends JComponent {
 						gameScreen.repaint();
 						logic.logicUpdate();
 					}
-					switchToHighScore();
+					logic.onExit();
 				}
+				switchToHighScore();
 			}
 
 		});
@@ -136,9 +137,8 @@ public class TitleScreen extends JComponent {
 		x.start();
 	}
 	public void switchToHighScore() {
-		Player.clear();
-		x.start();
 		gameWindow.switchScene(this);
+		x.start();
 
 	}
 	@Override

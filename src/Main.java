@@ -2,6 +2,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 
 import entity.MainLogic;
+import entity.Player;
 import render.GameScreen;
 import render.RenderManager;
 import ui.TitleScreen;
@@ -17,7 +18,7 @@ public class Main {
 // 		frame.getContentPane().add(gameScreen);
 // 		frame.pack();
 // 		frame.setVisible(true);
-// 		while(true) {
+// 		while(!Player.isGameOver()) {
 // 			try {
 //				Thread.sleep(20);
 //			} catch (InterruptedException e) {

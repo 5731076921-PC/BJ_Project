@@ -56,13 +56,14 @@ private static int tempScore;
 	public static void setStressLevel(int stressLevel) {
 		if(stressLevel >100) {
 			Player.stressLevel =0;
-			try {
-				setLevel(getLevel()+1);
-			} catch (GameOverException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				gameOver = true;
-			}
+				try {
+					setLevel(getLevel()+1);
+				} catch (GameOverException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					setStressLevel(100);
+					gameOver = true;
+				}
 
 		}
 		else if(stressLevel < 0) 
@@ -80,6 +81,9 @@ private static int tempScore;
 	}
 	public static boolean isGameOver() {
 		return gameOver;
+	}
+	public static void setGameOver(boolean gameOver) {
+		Player.gameOver = gameOver;
 	}
 
 

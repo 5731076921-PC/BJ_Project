@@ -27,6 +27,7 @@ public class MainLogic {
 	private static boolean sleep;
 	private static boolean bomb;
 	private static boolean relax;
+	public static boolean gameOverFlag;
 	private int hitCounter = 0;
 	private int sleepCounter = 0;
 	private int relaxCounter = 0;
@@ -48,6 +49,14 @@ public class MainLogic {
 	public synchronized void onExit() {
 		onScreenObject.clear();
 		renderManager.clear();
+		hitCounter =0;
+		sleepCounter =0;
+		relaxCounter =0;
+		hitted = false;
+		sleep =false;
+		bomb =false;
+		relax = false;
+		Player.clear();
 	}
 
 	public void logicUpdate() {

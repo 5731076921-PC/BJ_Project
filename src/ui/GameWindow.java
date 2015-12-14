@@ -8,7 +8,13 @@ import javax.swing.JPanel;
 public class GameWindow extends JFrame{
 
 	private JComponent currentScene;
-	
+	public GameWindow() {
+		super("Let's Take a Break!");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setResizable(false);
+		this.pack();
+		setVisible(true);
+	}
 	public GameWindow(JComponent scene){
 		super("Let's Take a Break!");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -27,6 +33,7 @@ public class GameWindow extends JFrame{
 		getContentPane().validate();
 		pack();
 		currentScene.requestFocus();
+		this.repaint();
 	}
 	
 	public JComponent getCurrentScene(){
