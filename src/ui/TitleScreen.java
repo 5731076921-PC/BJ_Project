@@ -138,7 +138,33 @@ public class TitleScreen extends JComponent {
 	}
 	public void switchToHighScore() {
 		gameWindow.switchScene(this);
-		x.start();
+		x = new Thread(new Runnable() {
+
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					synchronized (logic) {
+						try {
+							logic.wait();
+						} catch (InterruptedException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						while (!Player.isGameOver()) {
+							try {
+								Thread.sleep(20);
+							} catch (InterruptedException e) {
+							}
+							gameScreen.repaint();
+							logic.logicUpdate();
+						}
+						logic.onExit();
+					}
+					switchToHighScore();
+				}
+
+			});
+		 x.start();
 
 	}
 	@Override

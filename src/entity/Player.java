@@ -60,7 +60,7 @@ private static int tempScore;
 					setLevel(getLevel()+1);
 				} catch (GameOverException e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					//e.printStackTrace();
 					setStressLevel(100);
 					gameOver = true;
 				}
