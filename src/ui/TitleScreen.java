@@ -27,6 +27,7 @@ public class TitleScreen extends JComponent {
 	private GameWindow gameWindow;
 	private RenderManager renderManager;
 	private boolean isTutorial;
+	private MainLogic logic;
 	private int tutorialCounter = 0;
 	private Thread x;
 
@@ -46,7 +47,7 @@ public class TitleScreen extends JComponent {
 	public TitleScreen() {
 		this.setPreferredSize(new Dimension(1200, 680));
 		renderManager = new RenderManager();
-		MainLogic logic = new MainLogic(renderManager);
+		logic = new MainLogic(renderManager);
 		gameScreen = new GameScreen(renderManager);
 		gameScreen.setFocusable(true);
 		gameWindow = new GameWindow(this);
@@ -76,6 +77,7 @@ public class TitleScreen extends JComponent {
 
 		});
 
+
 		addMouseListener(new MouseListener() {
 
 			@Override
@@ -102,8 +104,8 @@ public class TitleScreen extends JComponent {
 					if (e.getY() >= 308 && e.getY() <= 388) {
 						synchronized (logic) {
 							logic.notifyAll();
-
 							gameWindow.switchScene(gameScreen);
+
 						}
 					} else if (e.getY() >= 413 && e.getY() <= 494) {
 						isTutorial = true;
@@ -134,9 +136,10 @@ public class TitleScreen extends JComponent {
 		x.start();
 	}
 	public void switchToHighScore() {
-		gameWindow.switchScene(this);
-		x.start();
 		Player.clear();
+		x.start();
+		gameWindow.switchScene(this);
+
 	}
 	@Override
 	protected void paintComponent(Graphics g) {

@@ -51,14 +51,14 @@ public class MainLogic {
 	}
 
 	public void logicUpdate() {
-		if(Player.isGameOver()) {
-			onExit();
-			return;
-		}
 		// Paused
+		synchronized(renderManager) {
 		if (InputUtility.getKeyTriggered(KeyEvent.VK_ENTER)) {
 			Player.setPause(!Player.isPause());
 			InputUtility.setKeyTriggered(KeyEvent.VK_ENTER, false);
+		}
+		if(!Player.isPause())
+			renderManager.notifyAll();
 		}
 
 		if (Player.isPause()) {

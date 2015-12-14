@@ -61,13 +61,9 @@ public class RenderManager {
 				entity.draw(g2d);
 			}
 		}
+		if(Player.isPause()) {
 		DrawingUtility.drawPauseString(g2d);
-		this.update();
-		try {
-			this.wait();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
+		this.update();
 	}
 }
