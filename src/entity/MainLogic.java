@@ -22,7 +22,6 @@ public class MainLogic {
 	private int zCounter = Integer.MIN_VALUE + 1;
 	// InitialDelay : ?, Rosen, F, Drug, Cartoon, Music, Bomb
 	private int[] nextObjectCreationDelay = { 30, 60, 600, 350, 650, 850, 1200 };
-	private int[] tempNextObjectCreationDelay = {30, 60, 600, 350, 650,850,1200};
 	private static boolean hitted;
 	private static boolean sleep;
 	private static boolean bomb;
@@ -57,7 +56,13 @@ public class MainLogic {
 		bomb =false;
 		relax = false;
 		Player.clear();
-		nextObjectCreationDelay = tempNextObjectCreationDelay;
+		nextObjectCreationDelay[0] = 30;
+		nextObjectCreationDelay[1] = 60;
+		nextObjectCreationDelay[2] = 600;
+		nextObjectCreationDelay[3] = 350;
+		nextObjectCreationDelay[4] = 650;
+		nextObjectCreationDelay[5] = 850;
+		nextObjectCreationDelay[6] = 1200;
 		AudioUtility.playMusicBg(relax);
 	}
 
