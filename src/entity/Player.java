@@ -82,9 +82,10 @@ private static int tempScore;
 	public static boolean isGameOver() {
 		return gameOver;
 	}
-	public static void setGameOver(boolean gameOver) {
-		Player.gameOver = gameOver;
+	public static int getTempScore() {
+		return tempScore;
 	}
+
 
 
 

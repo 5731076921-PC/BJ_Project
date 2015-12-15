@@ -57,6 +57,7 @@ public class MainLogic {
 		bomb =false;
 		relax = false;
 		Player.clear();
+		AudioUtility.playMusicBg(relax);
 	}
 
 	public void logicUpdate() {
