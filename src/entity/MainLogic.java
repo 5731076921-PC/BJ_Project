@@ -59,7 +59,6 @@ public class MainLogic {
 		Player.clear();
 		nextObjectCreationDelay = tempNextObjectCreationDelay;
 		AudioUtility.playMusicBg(relax);
-		zCounter = Integer.MIN_VALUE;
 	}
 
 	public void logicUpdate() {
