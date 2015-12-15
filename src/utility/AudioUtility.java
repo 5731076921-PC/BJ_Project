@@ -6,18 +6,16 @@ import java.applet.AudioClip;
 import entity.Player;
 
 public class AudioUtility {
-
+//Sound
 	private static AudioClip acBg;
 	private static AudioClip acRelax;
 	private static AudioClip acBomb;
-	private static AudioClip acPause;
 	private static AudioClip acHit;
 
 	static {
 		acBg = Applet.newAudioClip(AudioUtility.class.getClassLoader().getResource("res/sound/bgMusic01.wav"));
 		acRelax = Applet.newAudioClip(AudioUtility.class.getClassLoader().getResource("res/sound/RelaxingSong.wav"));
 		acBomb = Applet.newAudioClip(AudioUtility.class.getClassLoader().getResource("res/sound/bomb.wav"));
-		acPause = Applet.newAudioClip(AudioUtility.class.getClassLoader().getResource("res/sound/pause.wav"));
 		acHit = Applet.newAudioClip(AudioUtility.class.getClassLoader().getResource("res/sound/hit.wav"));
 	}
 
@@ -29,9 +27,6 @@ public class AudioUtility {
 			acRelax.play();
 		if (identifier.equalsIgnoreCase("bomb"))
 			acBomb.play();
-		if (identifier.equalsIgnoreCase("pause")) {
-			acPause.play();			
-		}
 		if (identifier.equalsIgnoreCase("hit"))
 			acHit.play();
 	}

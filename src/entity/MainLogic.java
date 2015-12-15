@@ -20,10 +20,9 @@ public class MainLogic {
 	private CopyOnWriteArrayList<Entity> onScreenObject = new CopyOnWriteArrayList<Entity>();
 
 	private int zCounter = Integer.MIN_VALUE + 1;
-	// InitialDelay: ?, Rosen, F, Drug, Cartoon, Music, Bomb
+	// InitialDelay : ?, Rosen, F, Drug, Cartoon, Music, Bomb
 	private int[] nextObjectCreationDelay = { 30, 60, 600, 350, 650, 850, 1200 };
-	// BACKUP
-	// private int[] nextObjectCreationDelay = {30, 60, 600, 350, 650,850,1200};
+	private int[] tempNextObjectCreationDelay = {30, 60, 600, 350, 650,850,1200};
 	private static boolean hitted;
 	private static boolean sleep;
 	private static boolean bomb;
@@ -58,6 +57,7 @@ public class MainLogic {
 		bomb =false;
 		relax = false;
 		Player.clear();
+		nextObjectCreationDelay = tempNextObjectCreationDelay;
 		AudioUtility.playMusicBg(relax);
 		zCounter = Integer.MIN_VALUE;
 	}
@@ -66,7 +66,6 @@ public class MainLogic {
 		// Paused
 		synchronized(renderManager) {
 		if (InputUtility.getKeyTriggered(KeyEvent.VK_ENTER)) {
-			if(!Player.isPause()) AudioUtility.playSound("pause");
 			Player.setPause(!Player.isPause());
 			InputUtility.setKeyTriggered(KeyEvent.VK_ENTER, false);
 		}
@@ -194,7 +193,7 @@ public class MainLogic {
 		}
 
 		if (nextObjectCreationDelay[5] <= 0) {
-			nextObjectCreationDelay[5] = RandomUtility.random(650, 800);
+			nextObjectCreationDelay[5] = RandomUtility.random(1700,1900 );
 			if(relax) nextObjectCreationDelay[0] *=2;
 			Music m = new Music(0, ScreenSize.HEIGHT - 146, zCounter, 2);
 			onScreenObject.add(m);

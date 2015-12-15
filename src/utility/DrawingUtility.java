@@ -13,6 +13,7 @@ import entity.Player;
 
 
 public class DrawingUtility {
+	//Static Variable
 	protected static final Font standardFont = new Font("Tahoma", Font.BOLD, 30);
 	protected static final Font smallFont = new Font("Tahoma", Font.BOLD, 20);
 	private static final int STRESSBAR_WIDTH = 65;
@@ -99,6 +100,11 @@ public class DrawingUtility {
 		g2.setColor(Color.BLACK);
 		g2.drawString("Stress", STRESSBAR_X+4, ScreenSize.HEIGHT-90);
 		g2.drawString("Level", STRESSBAR_X+7, ScreenSize.HEIGHT-70);
+		g2.setColor(Color.RED);
+		Color[] color = {new Color(255, 180, 0),new Color(214, 91, 0),Color.RED};
+		g2.setColor(color[Player.getLevel()-1]);
+		String[] lv = {"1","2","3"};
+		g2.drawString("LEVEL:" +lv[Player.getLevel()-1], STRESSBAR_X-10, STRESSBAR_Y-5);
 	}
 	public static void drawRosen(Graphics2D g2,int x, int y) {
 		g2.drawImage(rosen, null, x, y);
