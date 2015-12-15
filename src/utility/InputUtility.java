@@ -4,7 +4,7 @@ package utility;
 public class InputUtility {
 
 	private static int mouseX,mouseY;
-	private static boolean mouseLeftDown;
+	private static boolean mouseLeftDown,mouseOnScreen;
 	private static boolean mouseLeftTriggered;
 	private static boolean[] keyPressed = new boolean[256];
 	private static boolean[] keyTriggered = new boolean[256];
@@ -57,5 +57,11 @@ public class InputUtility {
 		for (int key = 0; key < 256; key++) {
 			setKeyTriggered(key, false);
 		}
+	}
+	public static boolean isMouseOnScreen() {
+		return mouseOnScreen;
+	}
+	public static void setMouseOnScreen(boolean mouseOnScreen) {
+		InputUtility.mouseOnScreen = mouseOnScreen;
 	}
 }
