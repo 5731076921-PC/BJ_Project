@@ -5,7 +5,7 @@ import entity.MainLogic;
 import entity.Player;
 import render.GameScreen;
 import render.RenderManager;
-import ui.TitleScreen;
+import ui.GameManager;
 
 public class Main {
 
@@ -28,6 +28,6 @@ public class Main {
 // 			logic.logicUpdate();
 // 			frame.repaint();
 // 		}
-		TitleScreen t = new TitleScreen();
+		GameManager g = new GameManager();
 	}
 }

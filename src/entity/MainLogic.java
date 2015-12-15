@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import render.IRenderable;
 import render.RenderManager;
@@ -16,7 +17,7 @@ import utility.ScreenSize;
 public class MainLogic {
 
 	// All renderable objects
-	private List<Entity> onScreenObject = new ArrayList<Entity>();
+	private CopyOnWriteArrayList<Entity> onScreenObject = new CopyOnWriteArrayList<Entity>();
 
 	private int zCounter = Integer.MIN_VALUE + 1;
 	// InitialDelay: ?, Rosen, F, Drug, Cartoon, Music, Bomb
@@ -58,17 +59,17 @@ public class MainLogic {
 		relax = false;
 		Player.clear();
 		AudioUtility.playMusicBg(relax);
+		zCounter = Integer.MIN_VALUE;
 	}
 
 	public void logicUpdate() {
 		// Paused
 		synchronized(renderManager) {
 		if (InputUtility.getKeyTriggered(KeyEvent.VK_ENTER)) {
+			if(!Player.isPause()) AudioUtility.playSound("pause");
 			Player.setPause(!Player.isPause());
 			InputUtility.setKeyTriggered(KeyEvent.VK_ENTER, false);
 		}
-		if(!Player.isPause())
-			renderManager.notifyAll();
 		}
 
 		if (Player.isPause()) {
@@ -130,7 +131,6 @@ public class MainLogic {
 				if (onScreenObject.get(i).isDestroyed())
 					onScreenObject.remove(i);
 			}
-			renderManager.notify();
 		}
 	}
 
@@ -149,6 +149,7 @@ public class MainLogic {
 			QuestionMark x = new QuestionMark(0, 450, zCounter, 3);
 			onScreenObject.add(x);
 			renderManager.add(x);
+			zCounter++;
 
 		}
 		if (nextObjectCreationDelay[1] <= 0) {
@@ -157,7 +158,7 @@ public class MainLogic {
 			Rosen y = new Rosen(0, RandomUtility.random(100, 400), zCounter, 5);
 			onScreenObject.add(y);
 			renderManager.add(y);
-
+			zCounter++;
 		}
 
 		if (nextObjectCreationDelay[2] <= 0) {
@@ -170,6 +171,7 @@ public class MainLogic {
 			for (int i = 0; i < f.length; i++) {
 				onScreenObject.add(f[i]);
 				renderManager.add(f[i]);
+				zCounter++;
 			}
 		}
 
@@ -179,6 +181,7 @@ public class MainLogic {
 			SleepyDrug z = new SleepyDrug(0, 350, zCounter, 20, 3);
 			onScreenObject.add(z);
 			renderManager.add(z);
+			zCounter++;
 		}
 
 		if (nextObjectCreationDelay[4] <= 0) {
@@ -187,6 +190,7 @@ public class MainLogic {
 			Cartoon w = new Cartoon(0, ScreenSize.HEIGHT - 146, zCounter, 2);
 			onScreenObject.add(w);
 			renderManager.add(w);
+			zCounter++;
 		}
 
 		if (nextObjectCreationDelay[5] <= 0) {
@@ -195,6 +199,7 @@ public class MainLogic {
 			Music m = new Music(0, ScreenSize.HEIGHT - 146, zCounter, 2);
 			onScreenObject.add(m);
 			renderManager.add(m);
+			zCounter++;
 		}
 
 		if (nextObjectCreationDelay[6] <= 0) {
@@ -203,12 +208,12 @@ public class MainLogic {
 			Bomb b = new Bomb(0, ScreenSize.HEIGHT - 146, zCounter, 2);
 			onScreenObject.add(b);
 			renderManager.add(b);
+			zCounter++;
 		}
 
 		// Increase z counter (so the next object will be created on top of the
 		// previous one)
-		zCounter++;
-		if (zCounter == Integer.MAX_VALUE - 1) {
+		if (zCounter == Integer.MAX_VALUE - 10) {
 			zCounter = Integer.MIN_VALUE + 1;
 		}
 	}
@@ -252,28 +257,4 @@ public class MainLogic {
 	public static void setRelax(boolean relax) {
 		MainLogic.relax = relax;
 	}
-
-
-
-	// public synchronized List<IRenderable> getSortedRenderableObject() {
-	// List<IRenderable> sortedRenderable = new ArrayList<IRenderable>();
-	// if(!readyToRender) return sortedRenderable;
-	// for(CollidableEntity object : onScreenObject){
-	// sortedRenderable.add(object);
-	// }
-	//
-	//
-	// Collections.sort(sortedRenderable, new Comparator<IRenderable>() {
-	// @Override
-	// public int compare(IRenderable o1, IRenderable o2) {
-	// if(o1.getZ() > o2.getZ())
-	// return 1;
-	// else if(o1.getZ() < o2.getZ())
-	// return -1;
-	// else
-	// return 0;
-	// }
-	// });
-	// return sortedRenderable;
-	// }
 }

@@ -22,7 +22,7 @@ import render.RenderManager;
 import utility.AudioUtility;
 import utility.ScreenSize;
 
-public class TitleScreen extends JComponent {
+public class GameManager extends JComponent {
 	private static BufferedImage title;
 	private static BufferedImage tut[] = new BufferedImage[4];
 	private static BufferedImage gameOver;
@@ -36,19 +36,19 @@ public class TitleScreen extends JComponent {
 	private Thread x;
 	static {
 		try {
-			title = ImageIO.read(TitleScreen.class.getClassLoader().getResource("res/img/title.png"));
-			tut[0] = ImageIO.read(TitleScreen.class.getClassLoader().getResource("res/img/tutorial01.png"));
-			tut[1] = ImageIO.read(TitleScreen.class.getClassLoader().getResource("res/img/tutorial02.png"));
-			tut[2] = ImageIO.read(TitleScreen.class.getClassLoader().getResource("res/img/tutorial03.png"));
-			tut[3] = ImageIO.read(TitleScreen.class.getClassLoader().getResource("res/img/tutorial04.png"));
-			gameOver = ImageIO.read(TitleScreen.class.getClassLoader().getResource("res/img/gameOver.png"));
+			title = ImageIO.read(GameManager.class.getClassLoader().getResource("res/img/title.png"));
+			tut[0] = ImageIO.read(GameManager.class.getClassLoader().getResource("res/img/tutorial01.png"));
+			tut[1] = ImageIO.read(GameManager.class.getClassLoader().getResource("res/img/tutorial02.png"));
+			tut[2] = ImageIO.read(GameManager.class.getClassLoader().getResource("res/img/tutorial03.png"));
+			tut[3] = ImageIO.read(GameManager.class.getClassLoader().getResource("res/img/tutorial04.png"));
+			gameOver = ImageIO.read(GameManager.class.getClassLoader().getResource("res/img/gameOver.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	public TitleScreen() {
+	public GameManager() {
 		this.setPreferredSize(new Dimension(1200, 680));
 		renderManager = new RenderManager();
 		logic = new MainLogic(renderManager);

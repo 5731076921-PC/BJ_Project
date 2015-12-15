@@ -26,7 +26,7 @@ public abstract class Entity implements IRenderable {
 	public abstract void onClick();
 	public abstract void move();
 	public boolean isMouseOver() {
-		if(InputUtility.getMouseX()<= x+width) {
+		if(InputUtility.getMouseX()<= x+width && InputUtility.getMouseX() >=x) {
 			if(InputUtility.getMouseY()>y && InputUtility.getMouseY()<y+height) {
 				return true;
 			}

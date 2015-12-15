@@ -4,7 +4,6 @@ import java.awt.Graphics2D;
 import org.w3c.dom.Entity;
 
 import exception.GameOverException;
-import exception.ScoreException;
 import render.IRenderable;
 
 public class Player {
@@ -31,11 +30,10 @@ private static int tempScore;
 		gameOver=false;
 		stressLevel =0;
 	}
-	public static void setScore(int score) /*throws ScoreException*/ {
+	public static void setScore(int score) {
 		Player.score = score;
 		if(Player.score <0) {
 			Player.score=0;
-			// throw new ScoreException();
 		}
 	}
 

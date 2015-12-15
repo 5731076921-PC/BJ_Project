@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.imageio.ImageIO;
 
@@ -20,10 +21,10 @@ import utility.DrawingUtility;
 
 public class RenderManager {
 	
-	private List<IRenderable> entities;
+	private CopyOnWriteArrayList<IRenderable> entities;
 	
 	public RenderManager(){
-		entities = new ArrayList<IRenderable>();
+		entities = new CopyOnWriteArrayList<IRenderable>();
 	}
 
 	public void add(IRenderable entity){

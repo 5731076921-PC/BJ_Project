@@ -11,6 +11,7 @@ import java.awt.event.MouseMotionListener;
 
 import javax.swing.JComponent;
 
+import utility.AudioUtility;
 import utility.InputUtility;
 
 
@@ -39,6 +40,7 @@ public class GameScreen extends JComponent{
 			@Override
 			public void mousePressed(MouseEvent arg0) {
 				// TODO Auto-generated method stub
+				AudioUtility.playSound("hit");
 				if(arg0.getButton() ==1){
 				InputUtility.setMouseLeftDown(true);
 				//InputUtility.setMouseLeftLastDown(true);
