@@ -4,8 +4,8 @@ package utility;
 public class InputUtility {
 
 	private static int mouseX,mouseY;
-	private static boolean mouseLeftDown,mouseRightDown,mouseOnScreen;
-	private static boolean mouseLeftTriggered,mouseRightTriggered;
+	private static boolean mouseLeftDown;
+	private static boolean mouseLeftTriggered;
 	private static boolean[] keyPressed = new boolean[256];
 	private static boolean[] keyTriggered = new boolean[256];
 	
@@ -28,33 +28,12 @@ public class InputUtility {
 	public static void setMouseLeftDown(boolean mouseLeftDown) {
 		InputUtility.mouseLeftDown = mouseLeftDown;
 	}
-	public static boolean isMouseRightDown() {
-		return mouseRightDown;
-	}
-	public static void setMouseRightDown(boolean mouseRightDown) {
-		InputUtility.mouseRightDown = mouseRightDown;
-	}
-	
-	public static boolean isMouseOnScreen() {
-		return mouseOnScreen;
-	}
-	public static void setMouseOnScreen(boolean mouseOnScreen) {
-		InputUtility.mouseOnScreen = mouseOnScreen;
-	}
-	
 	public static boolean isMouseLeftClicked() {
 		return mouseLeftTriggered;
 	}
 	public static void setMouseLeftTriggered(boolean v){ 
 		InputUtility.mouseLeftTriggered = v;
 	}
-	public static boolean isMouseRightClicked() {
-		return mouseRightTriggered;
-	}
-	public static void setMouseRightTriggered(boolean v){
-		InputUtility.mouseRightTriggered = v;
-	}
-	
 	public static boolean getKeyPressed(int key) {
 		if(key>255 || key<0) return false;
 		return keyPressed[key];
@@ -75,7 +54,6 @@ public class InputUtility {
 	
 	public static void postUpdate(){
 		setMouseLeftTriggered(false);
-		setMouseRightTriggered(false);
 		for (int key = 0; key < 256; key++) {
 			setKeyTriggered(key, false);
 		}
